@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Code is potery.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-05-12T10:11:23.120Z</updated>
+  <updated>2015-05-12T15:41:12.797Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -18,9 +18,10 @@
     <title><![CDATA[Hello World]]></title>
     <link href="http://yoursite.com/2015/05/12/hello-world/"/>
     <id>http://yoursite.com/2015/05/12/hello-world/</id>
-    <published>2015-05-12T10:11:23.120Z</published>
-    <updated>2015-05-12T10:11:23.120Z</updated>
+    <published>2015-05-12T15:41:12.797Z</published>
+    <updated>2015-05-12T15:41:12.797Z</updated>
     <content type="html"><![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<a id="more"></a>
 <h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -31,10 +32,11 @@
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io]]>
+    <![CDATA[<p>Welcome to <a href="http://hexo.io/">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>]]>
+    
     </summary>
     
-      <category term="hexo,test,haha" scheme="http://yoursite.com/tags/hexo-test-haha/"/>
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
       <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
     
@@ -44,8 +46,8 @@
     <title><![CDATA[欢迎使用 Cmd Markdown 编辑阅读器]]></title>
     <link href="http://yoursite.com/2015/05/12/%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8/"/>
     <id>http://yoursite.com/2015/05/12/欢迎使用 Cmd Markdown 编辑阅读器/</id>
-    <published>2015-05-11T18:21:47.558Z</published>
-    <updated>2015-05-11T18:12:11.489Z</updated>
+    <published>2015-05-12T15:40:55.839Z</published>
+    <updated>2015-05-12T15:40:55.839Z</updated>
     <content type="html"><![CDATA[<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
 <blockquote>
 <ul>
@@ -55,6 +57,7 @@
 <li>撰写发布学术论文（LaTeX 公式支持）</li>
 </ul>
 </blockquote>
+<a id="more"></a>
 <p><img src="https://www.zybuluo.com/static/img/logo.png" alt="cmd-markdown-logo"></p>
 <p>除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：</p>
 <h3 id="Windows/Mac/Linux_全平台客户端"><a href="https://www.zybuluo.com/cmd/" target="_blank" rel="external">Windows/Mac/Linux 全平台客户端</a></h3><blockquote>
@@ -124,8 +127,20 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
-<bloc]]>
+<blockquote>
+<ul>
+<li>整理知识，学习笔记</li>
+<li>发布日记，杂文，所见所想</li>
+<li>撰写发布技术文稿（代码支持）</li>
+<li>撰写发布学术论文（LaTeX 公式支持）</li>
+</ul>
+</blockquote>]]>
+    
     </summary>
+    
+      <category term="Markdown" scheme="http://yoursite.com/tags/Markdown/"/>
+    
+      <category term="Markdown" scheme="http://yoursite.com/categories/Markdown/"/>
     
   </entry>
   
