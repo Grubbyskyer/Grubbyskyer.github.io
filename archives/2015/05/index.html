@@ -20,6 +20,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="一名弱者，在代码的世界里遨游ing...">
+<meta name="twitter:creator" content="@thunelegy">
 
     
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -61,11 +62,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<form class="search">
+							<label>Search</label>
+						<input type="text" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -88,6 +88,19 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
+    <a href="/2015/05/12/hello-world/" title="Hello World" itemprop="url">
+  
+
+    <time datetime="2015-05-12T10:11:23.120Z" itemprop="datePublished">2015-05-12</time>
+
+
+    <h1 itemprop="name">Hello World</h1>
+
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
     <a href="/2015/05/12/欢迎使用 Cmd Markdown 编辑阅读器/" title="欢迎使用 Cmd Markdown 编辑阅读器" itemprop="url">
   
 
@@ -95,19 +108,6 @@
 
 
     <h1 itemprop="name">欢迎使用 Cmd Markdown 编辑阅读器</h1>
-
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2015/05/11/hello-world/" title="Hello World" itemprop="url">
-  
-
-    <time datetime="2015-05-11T13:33:35.577Z" itemprop="datePublished">2015-05-11</time>
-
-
-    <h1 itemprop="name">Hello World</h1>
 
   </a>
 </section>
@@ -132,14 +132,22 @@
 	 
 	<div class="social-font" class="clearfix">
 		
+		<a href="http://weibo.com/234583516" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		<a href="https://twitter.com/thunelegy" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/xing.tian.7503" target="_blank" class="icon-facebook" title="facebook"></a>
 		
 		
 		
 		
 		
 		
-		
-		
+		<a href="mailto:296065540@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
 		
 	</div>
 			
@@ -300,6 +308,23 @@ $(document).ready(function(){
 <!-- MathJax End -->
 
 <!-- Tiny_search Begin -->
+
+<script>
+var option = {
+  engineKey: 'f0967ae09f9d3f92dbca'
+};
+(function(w,d,t,u,n,s,e){
+  s = d.createElement(t);
+  s.src = u;
+  s.async = 1;
+  w[n] = function(r){
+    w[n].opts = r;
+  };
+  e = d.getElementsByTagName(t)[0];
+  e.parentNode.insertBefore(s, e);
+})(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+_ts(option);
+</script>
 
 <!-- Tiny_search End -->
 
