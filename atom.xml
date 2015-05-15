@@ -4,7 +4,7 @@
   <subtitle><![CDATA[人生的乐趣就在于永不休止地折腾、折腾、折腾...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-05-15T06:29:13.417Z</updated>
+  <updated>2015-05-15T07:06:33.166Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,11 +15,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[测试插入多媒体]]></title>
-    <link href="http://yoursite.com/2015/05/15/test/"/>
-    <id>http://yoursite.com/2015/05/15/test/</id>
-    <published>2015-05-15T06:29:13.417Z</published>
-    <updated>2015-05-15T06:29:13.417Z</updated>
+    <title><![CDATA[测试多媒体]]></title>
+    <link href="http://yoursite.com/2015/05/15/testMultiMedia/"/>
+    <id>http://yoursite.com/2015/05/15/testMultiMedia/</id>
+    <published>2015-05-15T07:06:54.090Z</published>
+    <updated>2015-05-15T07:06:33.166Z</updated>
     <content type="html"><![CDATA[<p>这篇文章主要是测试一下插入图片，音乐和视频。</p>
 <a id="more"></a>
 <h1 id="图片">图片</h1><p>代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![cmd-markdown-logo](http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-13-image1.png)</span><br></pre></td></tr></table></figure></p>
@@ -50,11 +50,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[搭建JSP+Servlet+mysql的开发环境]]></title>
-    <link href="http://yoursite.com/2015/05/15/%E6%90%AD%E5%BB%BAJSP+Servlet+mysql%E7%9A%84%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    <id>http://yoursite.com/2015/05/15/搭建JSP+Servlet+mysql的开发环境/</id>
-    <published>2015-05-15T06:25:40.159Z</published>
-    <updated>2015-05-15T06:25:40.159Z</updated>
+    <title><![CDATA[配置JSP+Servlet+mysql的开发环境]]></title>
+    <link href="http://yoursite.com/2015/05/15/%E9%85%8D%E7%BD%AEJSP+Servlet+mysql%E7%9A%84%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>http://yoursite.com/2015/05/15/配置JSP+Servlet+mysql的开发环境/</id>
+    <published>2015-05-15T07:06:16.881Z</published>
+    <updated>2015-05-15T07:06:02.964Z</updated>
     <content type="html"><![CDATA[<p>最近给一个哥们做毕设，要<code>JSP</code>+<code>Servlet</code>+<code>mysql</code>的，但是换了电脑啥环境都没了，连jdk都没装，只好重新配一遍了。<br><a id="more"></a></p>
 <h2 id="JDK环境变量">JDK环境变量</h2><h3 id="下载安装">下载安装</h3><p>我用的是 <strong>jdk1.6</strong>，因为我的<code>myeclipse</code>版本不高，编译器只到1.6，高版本的java感觉也用不上，就选了jdk1.6，这里是<strong>64位</strong>的下载地址：<a href="http://pan.baidu.com/s/1c0tWxEw" target="_blank" rel="external">JDK1.6</a></p>
 <p>下载完了，按照步骤提示安装就好了，会安装两次，一次<code>jdk</code>，一次<code>jre</code>，想换安装路径的话，注意手动设一下，我的没设置，就默认安到<code>C:\Program Files\Java</code>了。</p>
