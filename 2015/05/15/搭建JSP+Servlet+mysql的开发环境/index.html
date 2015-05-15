@@ -14,7 +14,7 @@
     <meta name="description" content="最近给一个哥们做毕设，要JSP+Servlet+mysql的，但是换了电脑啥环境都没了，连jdk都没装，只好重新配一遍了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建JSP+Servlet+mysql的开发环境">
-<meta property="og:url" content="http://yoursite.com/2015/05/14/搭建JSP+Servlet+mysql的开发环境/index.html">
+<meta property="og:url" content="http://yoursite.com/2015/05/15/搭建JSP+Servlet+mysql的开发环境/index.html">
 <meta property="og:site_name" content="TianXing's Blog">
 <meta property="og:description" content="最近给一个哥们做毕设，要JSP+Servlet+mysql的，但是换了电脑啥环境都没了，连jdk都没装，只好重新配一遍了。">
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image1.png">
@@ -26,6 +26,9 @@
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image7.png">
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image8.png">
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image9.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image14.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image15.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image16.png">
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image19.png">
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image10.png">
 <meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image11.png">
@@ -95,14 +98,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/14/搭建JSP+Servlet+mysql的开发环境/" title="搭建JSP+Servlet+mysql的开发环境" itemprop="url">搭建JSP+Servlet+mysql的开发环境</a>
+      <a href="/2015/05/15/搭建JSP+Servlet+mysql的开发环境/" title="搭建JSP+Servlet+mysql的开发环境" itemprop="url">搭建JSP+Servlet+mysql的开发环境</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="TianXing" target="_blank" itemprop="author">TianXing</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-13T20:30:26.875Z" itemprop="datePublished"> 发表于 2015-05-14</time>
+    <time datetime="2015-05-15T06:25:40.159Z" itemprop="datePublished"> 发表于 2015-05-15</time>
     
   </p>
 </header>
@@ -111,7 +114,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK环境变量"><span class="toc-number">1.</span> <span class="toc-text">JDK环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载安装"><span class="toc-number">1.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量："><span class="toc-number">1.2.</span> <span class="toc-text">配置环境变量：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装mysql"><span class="toc-number">2.</span> <span class="toc-text">安装mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载安装-1"><span class="toc-number">2.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与Myeclipse的配置"><span class="toc-number">2.2.</span> <span class="toc-text">与Myeclipse的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Tomcat"><span class="toc-number">3.</span> <span class="toc-text">安装Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载安装-2"><span class="toc-number">3.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">3.2.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试配置是否成功"><span class="toc-number">3.3.</span> <span class="toc-text">测试配置是否成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与Myeclipse的配置-1"><span class="toc-number">3.4.</span> <span class="toc-text">与Myeclipse的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板"><span class="toc-number">4.</span> <span class="toc-text">模板</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK环境变量"><span class="toc-number">1.</span> <span class="toc-text">JDK环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载安装"><span class="toc-number">1.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量："><span class="toc-number">1.2.</span> <span class="toc-text">配置环境变量：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Myeclipse"><span class="toc-number">2.</span> <span class="toc-text">安装Myeclipse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装mysql"><span class="toc-number">3.</span> <span class="toc-text">安装mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载安装-1"><span class="toc-number">3.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与Myeclipse的配置"><span class="toc-number">3.2.</span> <span class="toc-text">与Myeclipse的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Tomcat"><span class="toc-number">4.</span> <span class="toc-text">安装Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#下载安装-2"><span class="toc-number">4.1.</span> <span class="toc-text">下载安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置环境变量"><span class="toc-number">4.2.</span> <span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#测试配置是否成功"><span class="toc-number">4.3.</span> <span class="toc-text">测试配置是否成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#与Myeclipse的配置-1"><span class="toc-number">4.4.</span> <span class="toc-text">与Myeclipse的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板"><span class="toc-number">5.</span> <span class="toc-text">模板</span></a></li></ol>
 		
 		</div>
 		
@@ -156,6 +159,17 @@
 </blockquote>
 <p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image8.png" alt=""></p>
 <p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image9.png" alt=""></p>
+<hr>
+<h2 id="安装Myeclipse">安装Myeclipse</h2><ul>
+<li>这里是<code>Myeclipse10.0</code>的下载地址：<a href="http://pan.baidu.com/s/1bnhhpBh" target="_blank" rel="external">Myeclipse10.0</a></li>
+<li>这里是破解工具：<a href="http://pan.baidu.com/s/1gdw8h6j" target="_blank" rel="external">Myeclipse10.0破解工具</a></li>
+</ul>
+<p>将上面安装的jdk添加到Myeclipse中：<br>打开Myeclipse，点击菜单栏上的<code>window</code>，选择<code>preferences</code>，然后依次选择<code>Java</code>，<code>Installed JREs</code>，<code>Add</code>，如图：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image14.png" alt=""></p>
+<p>选择<code>Standard VM</code>，如图：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image15.png" alt=""></p>
+<p>将Java的安装路径填到图示位置，我的是<code>C:\Program Files\Java\jdk1.6.0_43</code>，下面的<code>name</code>随便填一个，最好跟Java版本有关，我写的是<code>jdk1.6.0_43</code>，然后<code>Finish</code>，如图：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-14-image16.png" alt=""></p>
 <hr>
 <h2 id="安装mysql">安装mysql</h2><h3 id="下载安装-1">下载安装</h3><ul>
 <li>这里是<code>mysql</code>的下载地址：<a href="http://pan.baidu.com/s/1ntoo2fB" target="_blank" rel="external">mysql_installer_community_V5.6.21.1_setup</a><br><strong>安装时候需要记住数据库的账号和密码</strong>，一般设为<code>root</code>，<code>root</code></li>
@@ -236,7 +250,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/05/14/搭建JSP+Servlet+mysql的开发环境/" data-title="搭建JSP+Servlet+mysql的开发环境 | TianXing&#39;s Blog" data-tsina="1748584393" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/05/15/搭建JSP+Servlet+mysql的开发环境/" data-title="搭建JSP+Servlet+mysql的开发环境 | TianXing&#39;s Blog" data-tsina="1748584393" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -249,6 +263,14 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/05/15/test/" title="测试插入多媒体">
+  <strong>上一篇：</strong><br/>
+  <span>
+  测试插入多媒体</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/05/12/hello-world/"  title="Hello World">
@@ -262,7 +284,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/14/搭建JSP+Servlet+mysql的开发环境/" data-title="搭建JSP+Servlet+mysql的开发环境" data-url="http://yoursite.com/2015/05/14/搭建JSP+Servlet+mysql的开发环境/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/15/搭建JSP+Servlet+mysql的开发环境/" data-title="搭建JSP+Servlet+mysql的开发环境" data-url="http://yoursite.com/2015/05/15/搭建JSP+Servlet+mysql的开发环境/"></div>
 </section>
 
 
@@ -279,7 +301,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>1</sup></a></li>
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
 		  
 		
 		  
@@ -300,7 +322,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
 			
 		
 			
@@ -313,6 +335,10 @@
 		
 			
 				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/test/" title="test">test<sup>1</sup></a></li>
 			
 		
 		</ul>
