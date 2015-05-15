@@ -4,7 +4,7 @@
   <subtitle><![CDATA[人生的乐趣就在于永不休止地折腾、折腾、折腾...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-05-13T20:30:26.875Z</updated>
+  <updated>2015-05-15T05:37:23.241Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,41 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[测试插入多媒体]]></title>
+    <link href="http://yoursite.com/2015/05/15/test/"/>
+    <id>http://yoursite.com/2015/05/15/test/</id>
+    <published>2015-05-15T05:37:23.241Z</published>
+    <updated>2015-05-15T05:37:23.241Z</updated>
+    <content type="html"><![CDATA[<p>这篇文章主要是测试一下插入图片，音乐和视频。</p>
+<a id="more"></a>
+<h1 id="图片">图片</h1><p>代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![cmd-markdown-logo](http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-13-image1.png)</span><br></pre></td></tr></table></figure></p>
+<p>效果<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-13-image1.png" alt="cmd-markdown-logo"></p>
+<h1 id="音乐">音乐</h1><p>代码1（虾米）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">embed</span> <span class="attribute">src</span>=<span class="value">"http://www.xiami.com/widget/0_1773265410/singlePlayer.swf"</span> <span class="attribute">type</span>=<span class="value">"application/x-shockwave-flash"</span> <span class="attribute">width</span>=<span class="value">"257"</span> <span class="attribute">height</span>=<span class="value">"33"</span> <span class="attribute">wmode</span>=<span class="value">"transparent"</span>&gt;</span><span class="tag">&lt;/<span class="title">embed</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<div><br><embed src="http://www.xiami.com/widget/0_1773265410/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent"><br></div>
+
+<p>代码2（网易）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">frameborder</span>=<span class="value">"no"</span> <span class="attribute">border</span>=<span class="value">"0"</span> <span class="attribute">marginwidth</span>=<span class="value">"0"</span> <span class="attribute">marginheight</span>=<span class="value">"0"</span> <span class="attribute">width</span>=<span class="value">330</span> <span class="attribute">height</span>=<span class="value">86</span> <span class="attribute">src</span>=<span class="value">"http://music.163.com/outchain/player?type=2&amp;amp;id=28639182&amp;amp;auto=1&amp;amp;height=66"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<div><br><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&amp;id=28639182&amp;auto=1&amp;height=66"></iframe><br></div>
+
+<p>这里总是有一大片莫名其妙的空白。。</p>
+<h1 id="视频">视频</h1><p>代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">height</span>=<span class="value">498</span> <span class="attribute">width</span>=<span class="value">510</span> <span class="attribute">src</span>=<span class="value">"http://player.youku.com/embed/XNjIyNDU1ODU2"</span> <span class="attribute">frameborder</span>=<span class="value">0</span> <span class="attribute">allowfullscreen</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<iframe height="498" width="510" src="http://player.youku.com/embed/XNjIyNDU1ODU2" frameborder="0" allowfullscreen></iframe>]]></content>
+    <summary type="html">
+    <![CDATA[<p>这篇文章主要是测试一下插入图片，音乐和视频。</p>]]>
+    
+    </summary>
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="test" scheme="http://yoursite.com/tags/test/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[搭建JSP+Servlet+mysql的开发环境]]></title>
@@ -130,41 +165,6 @@
       <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
     
       <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[测试插入多媒体]]></title>
-    <link href="http://yoursite.com/2015/05/13/test/"/>
-    <id>http://yoursite.com/2015/05/13/test/</id>
-    <published>2015-05-13T10:42:41.274Z</published>
-    <updated>2015-05-13T10:42:41.274Z</updated>
-    <content type="html"><![CDATA[<p>这篇文章主要是测试一下插入图片，音乐和视频。</p>
-<a id="more"></a>
-<h1 id="图片">图片</h1><p>代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![cmd-markdown-logo](http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-13-image1.png)</span><br></pre></td></tr></table></figure></p>
-<p>效果<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-05-13-image1.png" alt="cmd-markdown-logo"></p>
-<h1 id="音乐">音乐</h1><p>代码1（虾米）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">embed</span> <span class="attribute">src</span>=<span class="value">"http://www.xiami.com/widget/0_1773265410/singlePlayer.swf"</span> <span class="attribute">type</span>=<span class="value">"application/x-shockwave-flash"</span> <span class="attribute">width</span>=<span class="value">"257"</span> <span class="attribute">height</span>=<span class="value">"33"</span> <span class="attribute">wmode</span>=<span class="value">"transparent"</span>&gt;</span><span class="tag">&lt;/<span class="title">embed</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>效果：</p>
-<embed src="http://www.xiami.com/widget/0_1773265410/singlePlayer.swf" type="application/x-shockwave-flash" width="257" height="33" wmode="transparent">
-
-<p>代码2（网易）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">frameborder</span>=<span class="value">"no"</span> <span class="attribute">border</span>=<span class="value">"0"</span> <span class="attribute">marginwidth</span>=<span class="value">"0"</span> <span class="attribute">marginheight</span>=<span class="value">"0"</span> <span class="attribute">width</span>=<span class="value">330</span> <span class="attribute">height</span>=<span class="value">86</span> <span class="attribute">src</span>=<span class="value">"http://music.163.com/outchain/player?type=2&amp;amp;id=28639182&amp;amp;auto=1&amp;amp;height=66"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>效果：</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&amp;id=28639182&amp;auto=1&amp;height=66"></iframe>
-
-<p>这里总是有一大片莫名其妙的空白。。</p>
-<h1 id="视频">视频</h1><p>代码：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">height</span>=<span class="value">498</span> <span class="attribute">width</span>=<span class="value">510</span> <span class="attribute">src</span>=<span class="value">"http://player.youku.com/embed/XNjIyNDU1ODU2"</span> <span class="attribute">frameborder</span>=<span class="value">0</span> <span class="attribute">allowfullscreen</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>效果：</p>
-<iframe height="498" width="510" src="http://player.youku.com/embed/XNjIyNDU1ODU2" frameborder="0" allowfullscreen></iframe>]]></content>
-    <summary type="html">
-    <![CDATA[<p>这篇文章主要是测试一下插入图片，音乐和视频。</p>]]>
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-      <category term="test" scheme="http://yoursite.com/tags/test/"/>
-    
-      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
     
   </entry>
   
