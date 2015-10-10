@@ -1,0 +1,647 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Stanford Machine Learning Week1- -Linear Regression with One Variable | Xing&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="TIAN Xing">
+    
+
+    
+    <meta name="description" content="这周开始在coursera上学习Andrew Ng的Machine Learning课程了，就顺便做份笔记吧。Ng教授就不用多介绍了，美籍华人，中文名叫吴恩达，coursera的联合创始人之一，原来是谷歌大脑的负责人，现在被百度请来当首席科学家，负责百度大脑项目。他的这门机器学习课程也算是coursera上最经典的课程了，地址在此： https://www.coursera.org/learn/m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stanford Machine Learning Week1- -Linear Regression with One Variable">
+<meta property="og:url" content="http://yoursite.com/2015/10/10/Stanford Machine Learning Week1- -Linear Regression with One Variable/index.html">
+<meta property="og:site_name" content="Xing's Blog">
+<meta property="og:description" content="这周开始在coursera上学习Andrew Ng的Machine Learning课程了，就顺便做份笔记吧。Ng教授就不用多介绍了，美籍华人，中文名叫吴恩达，coursera的联合创始人之一，原来是谷歌大脑的负责人，现在被百度请来当首席科学家，负责百度大脑项目。他的这门机器学习课程也算是coursera上最经典的课程了，地址在此： https://www.coursera.org/learn/m">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_1.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_2.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_3.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_4.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_5.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_6.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_9.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_10.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_11.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_12.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_13.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_14.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_15.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_16.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_17.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_18.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_19.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-20.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-21.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-22.png">
+<meta property="og:image" content="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-23.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stanford Machine Learning Week1- -Linear Regression with One Variable">
+<meta name="twitter:description" content="这周开始在coursera上学习Andrew Ng的Machine Learning课程了，就顺便做份笔记吧。Ng教授就不用多介绍了，美籍华人，中文名叫吴恩达，coursera的联合创始人之一，原来是谷歌大脑的负责人，现在被百度请来当首席科学家，负责百度大脑项目。他的这门机器学习课程也算是coursera上最经典的课程了，地址在此： https://www.coursera.org/learn/m">
+<meta name="twitter:creator" content="@thunelegy">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Xing&#39;s Blog" title="Xing&#39;s Blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xing&#39;s Blog">Xing&#39;s Blog</a></h1>
+				<h2 class="blog-motto">人生的乐趣就在于永不休止地折腾、折腾、折腾...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<form class="search">
+							<label>Search</label>
+						<input type="text" id="ts-search-input" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/10/Stanford Machine Learning Week1- -Linear Regression with One Variable/" title="Stanford Machine Learning Week1- -Linear Regression with One Variable" itemprop="url">Stanford Machine Learning Week1- -Linear Regression with One Variable</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="TIAN Xing" target="_blank" itemprop="author">TIAN Xing</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-10T14:18:16.000Z" itemprop="datePublished"> 发表于 2015-10-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Environment_Setup_Instructions"><span class="toc-text">Environment Setup Instructions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Welcome_to_machine_learning"><span class="toc-text">Welcome to machine learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_Octave/MATLAB"><span class="toc-text">Install Octave/MATLAB</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#supervised_learning"><span class="toc-text">supervised learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unsupervised_learning"><span class="toc-text">unsupervised learning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model_and_Cost_Function"><span class="toc-text">Model and Cost Function</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#model_representation"><span class="toc-text">model representation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cost_function"><span class="toc-text">cost function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parameter_Learning"><span class="toc-text">Parameter Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient_Descent"><span class="toc-text">Gradient Descent</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Assignment"><span class="toc-text">Assignment</span></a></li></ol>
+		
+		</div>
+		
+		<p>这周开始在<code>coursera</code>上学习<code>Andrew Ng</code>的<code>Machine Learning</code>课程了，就顺便做份笔记吧。<br>Ng教授就不用多介绍了，美籍华人，中文名叫吴恩达，coursera的联合创始人之一，原来是谷歌大脑的负责人，现在被百度请来当首席科学家，负责百度大脑项目。他的这门机器学习课程也算是coursera上最经典的课程了，地址在此： <a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning</a></p>
+<a id="more"></a>
+<p>第一周也没讲什么深入的东西，先介绍了一下机器学习的概念、分类、应用等，接着讲了<code>单变量的线性回归</code>，然后讲了最优化里面的<code>梯度下降算法</code>，把二者结合起来就是一个简单的机器学习方法了。</p>
+<h2 id="Environment_Setup_Instructions">Environment Setup Instructions</h2><h3 id="Welcome_to_machine_learning">Welcome to machine learning</h3><blockquote>
+<p>Machine learning is the science of getting computers to learn, without being explicitly programmed.                 — Arthur Samuel</p>
+<p>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E. —Tom Mitchell</p>
+<p>Example: playing checkers.</p>
+<ul>
+<li>E = the experience of playing many games of checkers</li>
+<li>T = the task of playing checkers.</li>
+<li>P = the probability that the program will win the next game.</li>
+</ul>
+</blockquote>
+<p>机器学习的两个比较正式的定义，上面的那个较老一点，下面这个似乎不是很好理解，我也举个例子吧：比如给了过去50年某地区的天气资料，然后去预测未来的天气。这里 E：过去的天气资料 T：预测天气的任务 P：预测的准确率。</p>
+<h3 id="Install_Octave/MATLAB">Install Octave/MATLAB</h3><p>这门课有编程的作业，而且光听不实际操作一下也不容易理解。如果不是为了交作业的话，<code>Python</code> <code>Java</code> <code>R</code> … 等语言都可以，不过这门课只接受<code>MATLAB</code>的代码，而且就我个人的<code>Python</code>和<code>Java</code>体验来讲，在数据处理这方面，<code>MATLAB</code>还是最方便的，<code>R</code>没有体验过，据说也很不错。这里给一个<code>Matlab 2015a</code>的破解版地址：<a href="http://pan.baidu.com/s/1eQCYQ1k" target="_blank" rel="external">点此下载</a></p>
+<h2 id="Introduction">Introduction</h2><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_1.png" alt="Machine Learning"></p>
+<p>举例里面注意第二点：人工编程不容易实现的应用。比如：无人驾驶、手写识别、自然语言处理、可视化等等。</p>
+<h3 id="supervised_learning">supervised learning</h3><p>监督学习可以分为<strong>回归问题</strong>和<strong>分类问题</strong>。在回归问题（regression）中，因变量的值是连续的，也就是说我们要找到一个函数把自变量（特征）映射到一系列连续的值，比如给定房屋面积，预测房屋价格。在分类问题（classification）中，因变量的值是离散的，比如知道了肿瘤的大小，判断这个肿瘤是良性还是恶性的（0或1），这是一个二元分类，当然还可以有多元的分类。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_2.png" alt=""></p>
+<p>根据房屋面积预测房屋价格的例子，需要一批已经提前标注好的数据集，这里是单变量的，画到图上就是上图中的<code>X</code>，对其运用线性回归的话，可能就是图中粉色直线，但其实这条线拟合的并不好，图中的蓝线其实更符合房屋面积和价格之间的关系。粉线可能就是$y = \theta_0 + \theta_1 x$，蓝线可能是$y = \theta_0 + \theta_1 x + \theta_2 \sqrt x$，但如果把$\sqrt x$也当作一个新变量的话，蓝线也就变成$y = \theta_0 + \theta_1 x_1 + \theta_2 x_2$，也就是一个多变量的线性回归了，所以<strong>如何选择特征</strong>也是有一定技巧的，实际上这里有一个算法，后面的课程里面会讲。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_3.png" alt=""></p>
+<p>上面是一个回归的例子，这是一个分类的例子，还是单变量，知道肿瘤大小，判断这个肿瘤是良性还是恶性的。这里的因变量就是离散的一些值（这里是0、1），但也可以有更多，比如0、1、2、3，0 代表良性，1 代表类型 1 的肿瘤，2 代表类型 2 的肿瘤…</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_4.png" alt=""></p>
+<p>这是一个多变量（两特征）的分类，知道肿瘤大小和病人的年龄去判断肿瘤的性质— —蓝色圈表示良性，红色叉表示恶性，去拟合一条最优分隔线。</p>
+<h3 id="unsupervised_learning">unsupervised learning</h3><p>无监督学习是一种<strong>不需要已标注数据集</strong>的一种学习方式。比如常提到的<strong>聚类</strong>（clustering），就是利用数据之间的联系（比如距离）自动将数据分为几类。当然不只有聚类，还有<strong>联想式记忆</strong>（associative memory）等技术。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_5.png" alt=""></p>
+<p>这是一个无监督学习的例子，浏览网页的时候，会把内容相关的自动归到一类中，聚类的一个应用。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_6.png" alt=""></p>
+<p>这也是Ng课上提出来的例子，一个鸡尾酒会，两个麦克风，两个发言人，<code>#1</code> 离1号麦克风近一点，<code>#2</code>离2号麦克风近一点，但是都能录到他们的声音，现在如何从这些混合的音频中，将他们两个的发言区分开来…也是无监督学习的一个例子，Ng也给出了在<code>MATLAB</code>上的实现，只有<strong>一行</strong>代码：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="matrix">[W,s,v]</span> = svd((<span class="built_in">repmat</span>(sum(x.*x,<span class="number">1</span>),<span class="built_in">size</span>(x,<span class="number">1</span>),<span class="number">1</span>).*x)*x<span class="operator">'</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Model_and_Cost_Function">Model and Cost Function</h2><h3 id="model_representation">model representation</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_9.png" alt=""></p>
+<p>给了一个训练集，我们要通过一个学习算法建立一个模型，这里用的是<code>hypothesis</code>这个单词，也是一个命名的历史遗留问题。通过这个模型，再有新的数据时，可以得到对这个数据的预估值，见上图左面的流程图。那我们如何表示这个模型呢，这里就可以用$h_\theta(x) = \theta_0 + \theta_1x$ 来表示这个模型（单变量），那如何衡量这个模型的好坏呢，就要用到下面的<code>cost function</code>了。</p>
+<h3 id="cost_function">cost function</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_10.png" alt=""></p>
+<p>对于我们训练出来的模型，它做出来的预测肯定要与实际正确的值足够接近，那我们可以定义我们的费用函数$J(\theta)$为如下形式：<br>$$J(\theta) = \frac{1}{2m} \sum (h_{\theta}(x^{(i)}) - y^{(i)})^2$$</p>
+<p>为什么要把<code>cost function</code>定义为<strong>平方项</strong>呢，原因有以下几点：</p>
+<blockquote>
+<ol>
+<li>正负项同样得到惩罚，无论预测值是偏小还是偏大。</li>
+<li>大偏差比小偏差得到更大的惩罚（<del>为什么不用绝对值函数？</del>）</li>
+<li>二次函数的图像更平滑，且一次求导后变为线性，易于处理</li>
+<li>二次函数的凸性保证了函数的收敛，也就是保证有全局最小值</li>
+<li>平方项之和还有一些很有用的性质，比如旋转不变性（rotational invariance）（<del>为什么不用4次项</del>）</li>
+</ol>
+</blockquote>
+<p>至于前面的系数$\frac{1}{2m}$只是为了后续数学上处理的方便而加上的。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_11.png" alt=""></p>
+<p>直观地看一下$J(\theta)$的图像更有益于我们的理解，这里是固定$\theta_0 = 0$，看一下$J(\theta_1)$与$\theta_1$之间的关系，也就是上图中右边的二次函数，那如果是两个参数$\theta_0$ 和 $\theta_1$，$J(\theta)$与它们的关系就是下图了：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_12.png" alt=""> </p>
+<p>这样的图通常叫做<code>bowl shape</code>，可以很明显的看出来它只有<strong>一个</strong>局部最小点，那就是全局最小点。这点性质很重要，因为下面要讲的梯度下降算法，在目标函数有多个局部最小点时，会陷入局部最优而不是全局最优。</p>
+<h2 id="Parameter_Learning">Parameter Learning</h2><h3 id="Gradient_Descent">Gradient Descent</h3><p><strong>一个函数沿其梯度方向上升最快，沿其负梯度方向下降最快。</strong>这就是梯度下降算法求目标函数最值的原理。<br>用梯度下降算法求最小值的步骤大概如下（更多内容请参阅高等数学中的《最优化原理与方法》）：</p>
+<blockquote>
+<ol>
+<li>选取一个初始点</li>
+<li>计算在该点的梯度，沿负梯度方向“走一小步”，到达一个新点</li>
+<li>重复第二步，直到收敛（该点的梯度为0，到达了一个局部最小值）</li>
+</ol>
+</blockquote>
+<p>具体过程如下图所示：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_13.png" alt=""></p>
+<p>这里成功地找到了全局最小值，但是如果初始点选择的不好，则不一定能找到全局最小值，见下图：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_14.png" alt=""></p>
+<p>选取右边的初始点，则陷入了局部最小值，因为这里梯度等于 0，梯度下降算法结束，可见对于不同的目标函数和初始点，梯度下降算法不能保证一定找到全局最小值。但是在我们选取的<code>cost function</code>中，目标函数是二次函数，只有一个局部最小值，亦即全局最小值，所以是可行的。</p>
+<p>下面是将梯度下降算法应用到线性回归中$J(\theta)$的最小化过程中时，参数$\theta$的更新过程：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_15.png" alt=""></p>
+<p>因为$J(\theta)$是多元函数，所以用偏微分代替导数，梯度前面的 $\alpha$叫做<code>学习率</code>，最优化里面叫做<code>步长因子</code>，它决定了每次沿负梯度方向走的那一小步的距离。注意，在编码时候，各个参数是<strong>同时更新</strong>的，见上图。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_16.png" alt=""></p>
+<p>对于$\alpha$的选择也很有考究，如果太小，则需要很多的迭代次数才能达到最小值，也就是很慢；但如果选得太大，则很可能不能找到最小值，见上图右侧Ng的图示。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_17.png" alt=""></p>
+<p>即使我们始终保持学习率$\alpha$为一个定值，它每次搜索的步长也是逐渐减小的，所以我们没有必要动态更新$\alpha$的值。但我记得最优化里面的步长因子也是通过每次到达一个新点之后做<strong>直线搜索</strong>动态求解的。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_18.png" alt=""></p>
+<p>上图是将梯度下降算法应用到线性回归中$J(\theta)$求解的一个过程，右边的<code>contour</code>图可以很明显地看出随着迭代次数的增加迭代点的变化，$J(\theta)$最终也达到了最小值。</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_19.png" alt=""></p>
+<p>这种每到了一个新的迭代点，都用全部数据集（因为$J(\theta)$每次都是在全部数据集上求和得到的）求梯度的方法叫做<strong>批次(batch)梯度下降算法</strong>，事实上，我们每次在一个新的迭代点只选用一组数据也可以得到最优解，这样的方法叫做<strong>随机梯度下降算法</strong>，只是相较于<code>batch gradient descent</code>迭代次数更多，得到最优解的速度更慢一点，而且在每次的迭代过程中，批次梯度下降可以保证$J(\theta)$是一直在下降的，而随机梯度下降中由于每次只选取一组数据，所以在某些迭代步骤中有可能是令$J(\theta)$上升的。</p>
+<h2 id="Assignment">Assignment</h2><p>这次的作业也挺简单的，假如你是一个房地产开发商，给一组城市人口与利润的数据集，做一次单变量的线性回归。<br>数据集大概是这个样子的：</p>
+<p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-20.png" alt=""></p>
+<p><code>computeCost.m</code>用来计算$J(\theta)$的值：—&gt;（这里使用了矩阵运算，自己模拟一下就懂了）<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">J = (X * theta - y)<span class="operator">'</span> * (X *theta - y) / (<span class="number">2</span>*m);</span><br></pre></td></tr></table></figure></p>
+<p><code>gradientDescent.m</code>用来实现梯度下降：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> iter = <span class="number">1</span>:num_iters</span><br><span class="line">    <span class="comment">% theta = theta - alpha * X' * (X * theta - y);</span></span><br><span class="line">    temp = <span class="built_in">zeros</span>(<span class="number">1</span>, <span class="built_in">size</span>(theta, <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:m</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span> = <span class="number">1</span>:<span class="built_in">length</span>(theta)</span><br><span class="line">        temp(<span class="built_in">j</span>) = temp(<span class="built_in">j</span>) + (X(<span class="built_in">i</span>, :) * theta - y(<span class="built_in">i</span>)) * X(<span class="built_in">i</span>, <span class="built_in">j</span>);</span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line">    temp = temp / m;</span><br><span class="line">    theta = theta - alpha * temp<span class="operator">'</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+<p>加<code>%</code>那一行本来是想用矩阵运算代替<code>for</code>循环的，结果出错了-_-||</p>
+<p>用<code>surf</code>函数画一下$J(\theta)$的图形大概是这样的：<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-21.png" alt=""></p>
+<p>用<code>contour</code>函数画一下$J(\theta)$的等值线大概是这样的，中间的红叉是最终点：<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-22.png" alt=""></p>
+<p>最终拟合出来的直线如图：<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1-23.png" alt=""></p>
+<hr>
+<p>第一周的课，总体上感觉还是比较轻松的，而且相较于Ng 08年开的那门机器学习，感觉要浅显一些了，起码没有那么多公式推导，听起来要轻松不少。</p>
+<p>最近其实挺忙的，实验室的安卓项目催挺紧的，还是挤出了一点时间来跟进学习，希望能够坚持下去吧，要知道整个本科阶段上的课也没这么认真过啊-_-||，又是听课又是做作业又是写笔记的。。</p>
+<p>—EOF—</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Machine-Learning/">Machine Learning</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/10/10/Stanford Machine Learning Week1- -Linear Regression with One Variable/" data-title="Stanford Machine Learning Week1- -Linear Regression with One Variable | Xing&#39;s Blog" data-tsina="1748584393" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/06/10/Python3_spider_to_csuOJ/"  title="Python3爬虫模拟登录抓取OJ代码">
+ <strong>下一篇：</strong><br/> 
+ <span>Python3爬虫模拟登录抓取OJ代码
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/10/10/Stanford Machine Learning Week1- -Linear Regression with One Variable/" data-title="Stanford Machine Learning Week1- -Linear Regression with One Variable" data-url="http://yoursite.com/2015/10/10/Stanford Machine Learning Week1- -Linear Regression with One Variable/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Hexo/" title="Hexo">Hexo<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/Machine-Learning/" title="Machine Learning">Machine Learning<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Python3/" title="Python3">Python3<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/JSP/" title="JSP">JSP<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/mysql/" title="mysql">mysql<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Markdown/" title="Markdown">Markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/test/" title="test">test<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python3/" title="python3">python3<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/爬虫/" title="爬虫">爬虫<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Machine-Learning/" title="Machine Learning">Machine Learning<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1748584393&verifier=465b5d97&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Someday. That&#39;s a dangerous word. <br/>
+			It&#39;s really just a code for never.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/234583516" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		<a href="https://twitter.com/thunelegy" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/xing.tian.7503" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		
+		
+		<a href="https://www.zhihu.com/people/tian-xing-60-64" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="TIAN Xing">TIAN Xing</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"grubbyskyer"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<script>
+var option = {
+  engineKey: 'f0967ae09f9d3f92dbca'
+};
+(function(w,d,t,u,n,s,e){
+  s = d.createElement(t);
+  s.src = u;
+  s.async = 1;
+  w[n] = function(r){
+    w[n].opts = r;
+  };
+  e = d.getElementsByTagName(t)[0];
+  e.parentNode.insertBefore(s, e);
+})(window,document,'script','//tinysou-cdn.b0.upaiyun.com/ts.js','_ts');
+_ts(option);
+</script>
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

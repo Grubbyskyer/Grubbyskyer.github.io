@@ -186,6 +186,8 @@ h1 {
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
+  width: (18em / 14);
+  text-align: center;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
