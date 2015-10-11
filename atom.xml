@@ -4,7 +4,7 @@
   <subtitle><![CDATA[人生的乐趣就在于永不休止地折腾、折腾、折腾...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-10-10T18:00:03.027Z</updated>
+  <updated>2015-10-10T20:03:51.194Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2015/10/10/Stanford%20Machine%20Learning%20Week1-%20-Linear%20Regression%20with%20One%20Variable/"/>
     <id>http://yoursite.com/2015/10/10/Stanford Machine Learning Week1- -Linear Regression with One Variable/</id>
     <published>2015-10-10T14:18:16.000Z</published>
-    <updated>2015-10-10T18:00:03.027Z</updated>
+    <updated>2015-10-10T20:03:51.194Z</updated>
     <content type="html"><![CDATA[<p>这周开始在<code>coursera</code>上学习<code>Andrew Ng</code>的<code>Machine Learning</code>课程了，就顺便做份笔记吧。<br>Ng教授就不用多介绍了，美籍华人，中文名叫吴恩达，coursera的联合创始人之一，原来是谷歌大脑的负责人，现在被百度请来当首席科学家，负责百度大脑项目。他的这门机器学习课程也算是coursera上最经典的课程了，地址在此： <a href="https://www.coursera.org/learn/machine-learning" target="_blank" rel="external">https://www.coursera.org/learn/machine-learning</a></p>
 <a id="more"></a>
 <p>第一周也没讲什么深入的东西，先介绍了一下机器学习的概念、分类、应用等，接着讲了<code>单变量的线性回归</code>，然后讲了最优化里面的<code>梯度下降算法</code>，把二者结合起来就是一个简单的机器学习方法了。</p>
@@ -52,7 +52,7 @@
 <h2 id="Model_and_Cost_Function">Model and Cost Function</h2><h3 id="model_representation">model representation</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_9.png" alt=""></p>
 <p>给了一个训练集，我们要通过一个学习算法建立一个模型，这里用的是<code>hypothesis</code>这个单词，也是一个命名的历史遗留问题。通过这个模型，再有新的数据时，可以得到对这个数据的预估值，见上图左面的流程图。那我们如何表示这个模型呢，这里就可以用$h_\theta(x) = \theta_0 + \theta_1x$ 来表示这个模型（单变量），那如何衡量这个模型的好坏呢，就要用到下面的<code>cost function</code>了。</p>
 <h3 id="cost_function">cost function</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-10-1_10.png" alt=""></p>
-<p>对于我们训练出来的模型，它做出来的预测肯定要与实际正确的值足够接近，那我们可以定义我们的费用函数$J(\theta)$为如下形式：<br>$$J(\theta) = \frac{1}{2m} \sum (h_{\theta}(x^{(i)}) - y^{(i)})^2$$</p>
+<p>对于我们训练出来的模型，它做出来的预测肯定要与实际正确的值足够接近，那我们可以定义我们的费用函数$J(\theta)$为如下形式：<br>$$J(\theta) = \frac{1}{2m}\cdot \sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})^2$$</p>
 <p>为什么要把<code>cost function</code>定义为<strong>平方项</strong>呢，原因有以下几点：</p>
 <blockquote>
 <ol>
@@ -356,7 +356,7 @@
     <link href="http://yoursite.com/2015/05/12/%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8/"/>
     <id>http://yoursite.com/2015/05/12/欢迎使用 Cmd Markdown 编辑阅读器/</id>
     <published>2015-05-12T10:08:16.000Z</published>
-    <updated>2015-09-27T17:54:36.629Z</updated>
+    <updated>2015-10-11T15:50:04.009Z</updated>
     <content type="html"><![CDATA[<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
 <blockquote>
 <ul>
