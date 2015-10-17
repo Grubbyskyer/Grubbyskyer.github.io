@@ -4,7 +4,7 @@
   <subtitle><![CDATA[人生的乐趣就在于永不休止地折腾、折腾、折腾...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-10-10T20:03:51.194Z</updated>
+  <updated>2015-10-17T15:53:12.188Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,75 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Stanford Machine Learning Week2- -Linear Regression with Multiple Variables]]></title>
+    <link href="http://yoursite.com/2015/10/17/Stanford%20Machine%20Learning%20Week2-%20-Linear%20Regression%20with%20Multiple%20Variables/"/>
+    <id>http://yoursite.com/2015/10/17/Stanford Machine Learning Week2- -Linear Regression with Multiple Variables/</id>
+    <published>2015-10-17T15:03:55.000Z</published>
+    <updated>2015-10-17T15:53:12.188Z</updated>
+    <content type="html"><![CDATA[<p>第二周的课程因为要介绍<code>Octave</code>，所以没讲太多新的知识，只是把第一周线性回归里面的特征由单变量延展到了多变量，新知识点是<code>特征归一化</code>，最后引入了一个<code>正规方程组</code>的方法。</p>
+<a id="more"></a>
+<h2 id="Multivariate_Linear_Regression">Multivariate Linear Regression</h2><h3 id="Multiple_Features">Multiple Features</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-1.png" alt=""><br>还是预测房屋价格的例子，但是特征项不只是房屋面积了，那我们的模型要由原来的 $h_\theta (x) = \theta_0 + \theta_1 x_1$ 变为 $h_\theta (x) = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \cdots + \theta_n x_n$</p>
+<h3 id="Gradient_Descent_for_Multiple_Variables">Gradient Descent for Multiple Variables</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-2.png" alt=""><br>梯度下降算法也是一样，只是原来每次迭代只更新 $\theta_0$和 $ \theta_1$两个值，现在每次迭代过程中要更新<code>n+1</code>个值。</p>
+<h3 id="Feature_Scaling">Feature Scaling</h3><p>在多变量的线性回归模型中，<code>特征归一化</code>是很重要的一步。由于各个特征值的范围有大有小，如果不采取归一化操作，就会造成在数据上较小的特征对模型的影响较小，而实际上它们和取值范围较大的特征项应该是同等重要的地位。如下图，两个特征项的情况：<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-3.png" alt=""><br>可以看到，房屋面积的取值大概在<code>0~2000</code>，而卧室数的取值只有<code>1~5</code>，如果不把它们“缩放”到同一范围内，很显然，模型的参数将主要由房屋面积决定，而且由图可以看出，此时（左图- -未归一化）的迭代次数要明显多于右图。特征归一化，就是把各个特征项的值归一到同一范围。<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-4.png" alt=""><br>还有一种归一化操作叫<code>均值归一化</code>。顾名思义，就是将每个特征里的每个值都用该特征的均值做一次标准化。综合以上两种方法，我们在做特征归一化的时候可以采取以下的形式：<br>$$x = \frac{x - \mu}{S}$$<br>其中 $\mu$是该特征项的均值，$S$是一个缩放范围，通常可采取<code>最大值减最小值</code>或者<code>标准差</code>的形式。（怎么好像莫名其妙就要往高斯分布上靠了。。）</p>
+<h3 id="Learning_Rate">Learning Rate</h3><p>在我们采取梯度下降算法去拟合出最佳回归线的过程中，学习率$\alpha$是我们自己选取的一个值，那我们如何保证程序在正确的运行呢？<br>一个显而易见的办法是，将$J(\theta)$与迭代次数的关系用坐标图表示出来，如果随着迭代次数的增加，$J(\theta)$在不断下降最后趋于平稳，那我们的选取的$\alpha$ 应该就是合适的，如下图。<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-5.png" alt=""><br>但如果我们得到的图像是下面这样的，那么一个很大的可能就是我们选择的$\alpha$太大了，需要改小一点。<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-6.png" alt=""></p>
+<blockquote>
+<p>理论上可以证明，对于一个充分小的学习率$\alpha$，$J(\theta)$ 的值在每次迭代的过程中都是减小的。</p>
+</blockquote>
+<p>但是考虑到迭代次数的关系，我们也不能把$\alpha$ 设置得太小，否则每次都是在走“baby step”（上图右边蓝线所示）。那么我们应该如何去选取$\alpha$ 的值呢？<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-7.png" alt=""><br>我们可以根据$J(\theta)$ 和迭代次数的图像慢慢地调整$\alpha$ 的大小，每次调整的幅度大概在<code>log</code>级别，如上图所示。</p>
+<h3 id="Features_and_Polynomial_Regression">Features and Polynomial Regression</h3><p><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-8.png" alt=""><br>如果在我们的模型中有两个特征项分别是长和宽，与其把它们当作两个特征项，也许采取它们的乘积- -面积作为一个新的特征项才更合适。所以我们建模使用的特征项不一定是数据集给的特征项。<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-9.png" alt=""><br>如果我们得到数据集是上图这样的形式，如果只选取<code>size</code>一个特征项，那么拟合出来的将是一条直线，而显然从图形直观上可以看出直线不太合适。那我们可以再增加一个<code>size^2</code>的特征项，虽然前半部分可以拟合，但考虑到二次函数（图中蓝线）过了顶点之后是要下降的，所以二次函数也不太合适。再增加一个<code>size^3</code>，此时好像比较合理了。那么这时候，<strong>特征归一化就显得尤为重要了</strong>。但三次项也不是最好的选择，最好的应该是<code>sqrt(size)</code>，见下图。<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-10.png" alt=""></p>
+<h2 id="Computing_Parameters_Analytically">Computing Parameters Analytically</h2><h3 id="Normal_Equation">Normal Equation</h3><p>要得到<br>$$\begin{equation*}<br>   \theta = \mathop{argmin}_{\theta} {J(\theta)}<br> \end{equation*}$$<br> 不只有梯度下降一种方法，还有一种比较常用的方法是<code>正规方程组</code>。<br> <img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-12.png" alt=""><br> $J(\theta)$是一个二次函数，先看$\theta$是一维的情况，此时$\theta$是一个实数，对于这样一个二次函数去找最小值，我们只需要求导，然后令导数等于0，就能得到最小值点。即只要从下面的式子中解出$\theta$：<br> $$\frac{\mathrm{d}}{\mathrm{d} \theta} J(\theta) = 0$$<br> 那么扩展到多维，我们也只需要求出各个的偏导数，然后令它们都等于0，从这些方程组中解出每个$\theta_j$的值：<br> $$\frac{\partial}{\partial \theta_j} J(\theta) = 0$$<br> <img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-14.png" alt=""><br> 如果采取矩阵运算的话，公式是（推导方法见<a href="#_1">附录</a>）<br> $$\theta = (X^T X)^{-1}X^T y$$<br> 在<code>Octave</code>里面也是一行代码：<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theta = pinv(X<span class="operator">'</span> * X) * X<span class="operator">'</span> * y;</span><br></pre></td></tr></table></figure></p>
+<p>如果采用正规方程组的方法，那么特征归一化就没有必要做了。那么什么时候采用梯度下降算法，什么时候选用正规方程组方法呢？<br><img src="http://7xj2nk.com1.z0.glb.clouddn.com/2015-10-17-15.png" alt=""><br>从上图可以看到：</p>
+<table>
+<thead>
+<tr>
+<th><code>梯度下降算法</code></th>
+<th><code>正规方程组</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需要手动选择学习率 $\alpha$</td>
+<td></td>
+</tr>
+<tr>
+<td>需要很多次迭代</td>
+<td>不需要迭代</td>
+</tr>
+<tr>
+<td></td>
+<td>需要计算$(X^T X)^{-1}$</td>
+</tr>
+<tr>
+<td>特征项很多时依然可行</td>
+<td>特征项很多时速度太慢</td>
+</tr>
+</tbody>
+</table>
+<p>比如说<code>n=1e6</code>时，梯度下降仍然是一个不错的算法，而此时正规方程组由于要计算$(X^T X)^{-1}$，运行比较缓慢。那么什么情况下，特征数会有<code>10^6</code>个呢？这门课的TA举了一个例子：</p>
+<blockquote>
+<p>A color image of size 1000x1000 pixels will have 3,000,000 features (1000x1000x3).</p>
+</blockquote>
+<p>再举一个例子：</p>
+<blockquote>
+<p>tri-grams from language models (common in NLP) typically go into the millions (more if you take 4-grams or 5-grams)</p>
+</blockquote>
+<h2 id="附录">附录</h2><p>如何得到- - - - ？<br> $$\theta = (X^T X)^{-1}X^T y$$<br>首先我们将 $h_\theta (x)$ 和 $J(\theta)$ 都写成向量形式：<br>$$h_\theta (x) = \theta^T x$$<br>$$J(\theta) = \frac{1}{2m}(X\theta - y)^T(X\theta - y)$$<br>因为我们要求的是<code>导数</code>等于0的点，所有前面的系数$\frac{1}{2m}$可以直接舍去，并将$J(\theta)$展开：<br>$$J(\theta) = (X \theta) ^T X \theta - (X \theta)^T y - y^T (X \theta) + y^T y$$<br>注意到，$X\theta$ 和 $y$ 都是列向量，$(X\theta)^T$ 和 $y^T$ 都是行向量，那么 $(X \theta)^T y$ 和 $y^T (X \theta)$ 都是对应的两个数相乘相加得到的一个<strong>实数</strong>，它们的值是一样的，所以 $J(\theta)$ 可以化简为：<br>$$J(\theta) = \theta^T X^T X \theta  - 2(X\theta)^T y + y^T y$$<br>对 $\theta$ 求导，这里的 $\theta$ 是一个向量，$\theta^T \cdots \theta$ 就相当于一维（实数）里面的平方项，求导为$2\cdots\theta$：<br>$$\frac{\partial J}{\partial \theta} = 2X^T X \theta - 2X^T y$$<br>令导数等于0，得：<br>$$X^T X \theta = X^T y$$<br>这里我们假定矩阵 $X^T X$ 是可逆的，得到最终结果：<br>$$\theta = (X^T X)^{-1}X^T y$$</p>
+<hr>
+<p>这一周都在开发安卓了，马上要验收项目了，赶得比较紧一点，幸好第二周的课也比较少，等下周把安卓的文档写了，就可以专心投入到这方面的学习了-_-||</p>
+<p>—EOF—</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>第二周的课程因为要介绍<code>Octave</code>，所以没讲太多新的知识，只是把第一周线性回归里面的特征由单变量延展到了多变量，新知识点是<code>特征归一化</code>，最后引入了一个<code>正规方程组</code>的方法。</p>]]>
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/categories/Machine-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Stanford Machine Learning Week1- -Linear Regression with One Variable]]></title>
@@ -356,7 +425,7 @@
     <link href="http://yoursite.com/2015/05/12/%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8%20Cmd%20Markdown%20%E7%BC%96%E8%BE%91%E9%98%85%E8%AF%BB%E5%99%A8/"/>
     <id>http://yoursite.com/2015/05/12/欢迎使用 Cmd Markdown 编辑阅读器/</id>
     <published>2015-05-12T10:08:16.000Z</published>
-    <updated>2015-10-11T15:50:04.009Z</updated>
+    <updated>2015-10-11T19:09:23.852Z</updated>
     <content type="html"><![CDATA[<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
 <blockquote>
 <ul>
@@ -417,7 +486,7 @@
 <h3 id="6-_管理工具栏">6. 管理工具栏</h3><p>为了便于管理您的文稿，在 <strong>预览区</strong> 的顶部放置了如下所示的 <strong>管理工具栏</strong>：</p>
 <p><img src="https://www.zybuluo.com/static/img/toolbar-manager.jpg" alt="tool-manager"></p>
 <p>通过管理工具栏可以：</p>
-<p><i class="fa">&#xf064;</i> 发布：将当前的文稿生成固定链接，在网络上发布，分享<br><i class="fa">&#xf15b;</i> 新建：开始撰写一篇新的文稿<br><i class="fa">&#xf1f8;</i> 删除：删除当前的文稿<br><i class="fa">&#xf0c2;</i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地<br><i class="fa">&#xf0c9;</i> 列表：所有新增和过往的文稿都可以在这里查看、操作<br><i class="fa">&#xf040;</i> 模式：切换 普通/Vim/Emacs 编辑模式</p>
+<p><i style="font-family: 'FontAwesome'; width: (18em / 14); text-align: center;">&#xf064;</i> 发布：将当前的文稿生成固定链接，在网络上发布，分享<br><i style="font-family: 'FontAwesome'; width: (18em / 14); text-align: center;">&#xf15b;</i> 新建：开始撰写一篇新的文稿<br><i style="font-family: 'FontAwesome'; width: (18em / 14); text-align: center;">&#xf1f8;</i> 删除：删除当前的文稿<br><i style="font-family: 'FontAwesome'; width: (18em / 14); text-align: center;">&#xf0c2;</i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地<br><i style="font-family: 'FontAwesome'; width: (18em / 14); text-align: center;">&#xf0c9;</i> 列表：所有新增和过往的文稿都可以在这里查看、操作<br><i style="font-family: 'FontAwesome'; width: (18em / 14); text-align: center;">&#xf040;</i> 模式：切换 普通/Vim/Emacs 编辑模式</p>
 <h3 id="7-_阅读工具栏">7. 阅读工具栏</h3><p><img src="https://www.zybuluo.com/static/img/toolbar-reader.jpg" alt="tool-manager"></p>
 <p>通过 <strong>预览区</strong> 右上角的 <strong>阅读工具栏</strong>，可以查看当前文稿的目录并增强阅读体验。</p>
 <p>工具栏上的五个图标依次为：</p>
