@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>chapter2-翻转向量，变位词，第K大的元素 | Xing&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 
+
+思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。
+12345678910111213141516171819202122#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt;char s[100];void reverse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chapter2-翻转向量，变位词，第K大的元素">
+<meta property="og:url" content="http://yoursite.com/2015/03/06/chapter2/index.html">
+<meta property="og:site_name" content="Xing's Blog">
+<meta property="og:description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 
+
+思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。
+12345678910111213141516171819202122#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt;char s[100];void reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chapter2-翻转向量，变位词，第K大的元素">
+<meta name="twitter:description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 
+
+思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。
+12345678910111213141516171819202122#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt;char s[100];void reverse">
+  
+    <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/author.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">TIAN Xing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/bitset/" style="font-size: 10px;">bitset</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">中南大学10级，现在本校读研。研究机器学习和自然语言处理相关算法。直男癌O^·^O死♂宅O^·^O极客范</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">TIAN Xing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/author.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">TIAN Xing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-chapter2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/06/chapter2/" class="article-date">
+  	<time datetime="2015-03-06T13:06:53.000Z" itemprop="datePublished">Mar 6</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      chapter2-翻转向量，变位词，第K大的元素
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 </p>
+</blockquote>
+<p>思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = l, m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> t;</span><br><span class="line">    <span class="keyword">for</span> (i = l; i &lt;= m; i++) &#123;</span><br><span class="line">        t = s[i]; s[i] = s[r - i + l]; s[r - i + l] = t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%s"</span>, s)) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i);</span><br><span class="line">        n = <span class="built_in">strlen</span>(s);</span><br><span class="line">        reverse(<span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">        reverse(i, n - <span class="number">1</span>);</span><br><span class="line">        reverse(<span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么转置一个m * n的矩阵呢？<br>也可以先按行互换，然后再按列互换，也是一种思路。</p>
+<blockquote>
+<p>Q2：变位词。有一个词典，其中“pots”、“stop”、“tops”互为变位词。给定一个词找出这个词在词典中的所有变位词。</p>
+</blockquote>
+<p>思路：先将词典中的每个单词排序，这样变位词都有一样的表示形式，比如上面三个词都可以表示为“opst”，然后将整个词典排序，新来一个词时，先求其标准形式，然后在词典中二分查找即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;algorithm&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">struct</span> word <span class="comment">//old放原词汇，str为排序后的标准形式</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> old[<span class="number">100</span>], str[<span class="number">100</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;word&gt; dic;<span class="comment">//用vector做一个字典</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmp</span><span class="params">(word a, word b)</span> </span>&#123; <span class="comment">//按str标准形式排序</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(a.str, b.str) &lt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, len, i;<span class="comment">//n:词典中的单词个数</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    word w;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, w.old);</span><br><span class="line">        <span class="built_in">strcpy</span>(w.str, w.old);<span class="comment">//str = old</span></span><br><span class="line">        len = <span class="built_in">strlen</span>(w.str); </span><br><span class="line">        sort(w.str, w.str + len);<span class="comment">// 排序str</span></span><br><span class="line">        dic.push_back(w);<span class="comment">//加入词典</span></span><br><span class="line">    &#125;</span><br><span class="line">    sort(dic.begin(), dic.end(), cmp);<span class="comment">//对整个词典排序</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;word&gt;::iterator l, r, k;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%s"</span>, w.old)) &#123;</span><br><span class="line">        len = <span class="built_in">strlen</span>(w.old);</span><br><span class="line">        <span class="built_in">strcpy</span>(w.str, w.old);</span><br><span class="line">        sort(w.str, w.str + len);<span class="comment">//找到其标准形式</span></span><br><span class="line">        l = lower_bound(dic.begin(), dic.end(), w, cmp);</span><br><span class="line">        r = upper_bound(dic.begin(), dic.end(), w, cmp);</span><br><span class="line">        <span class="keyword">for</span> (k = l; k != r; k++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, (*k).old);<span class="comment">//输出词典中的变位词</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意其中的两个函数，lower_bound(Iterator first, last, key, cmp) 和 upper_bound(Iterator first, last, key, cmp) 这俩都是二分查找的函数</p>
+<p>lower_bound返回大于等于key的第一个元素的位置<br>upper_bound返回大于key的第一个元素的位置</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;algorithm&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">20</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> l, r;</span><br><span class="line">    l = lower_bound(a, a + <span class="number">5</span>, <span class="number">20</span>) - a;</span><br><span class="line">    r = upper_bound(a, a + <span class="number">5</span>, <span class="number">20</span>) - a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, l, r);</span><br><span class="line">    l = lower_bound(a, a + <span class="number">5</span>, <span class="number">10</span>) - a;</span><br><span class="line">    r = upper_bound(a, a + <span class="number">5</span>, <span class="number">10</span>) - a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, l, r);</span><br><span class="line">    l = lower_bound(a, a + <span class="number">5</span>, <span class="number">50</span>) - a;</span><br><span class="line">    r = upper_bound(a, a + <span class="number">5</span>, <span class="number">50</span>) - a;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, l, r);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出为：</span></span><br><span class="line"><span class="comment">//0 2</span></span><br><span class="line"><span class="comment">//0 0</span></span><br><span class="line"><span class="comment">//4 5</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Q3：给定一个n元实数集合，一个实数t，一个整数k，是否存在一个k元子集，其元素之和不超过t？</p>
+</blockquote>
+<p>这道题第一想法就是找出前k个最小的数，看它们的和是否超过t，这样问题转化为：在n个数中，找出前k个最小的数。<br>解法就是，建一个大小为k的最小堆，然后遍历所有元素，复杂度为$O(nlogk)$</p>
+<p>但是仔细想下，对于这个问题，我们只需要找到前k个最小的数即可，而这些数之间的大小关系我们并不需要知道，由此想到了什么？<br>当然是快排的步骤中，枢轴左边的数全都小于枢轴元素，我们可以借鉴这个思想，就把问题转化为：求n个数中的第k小数。<br>leetcode上有一道求第K大数的题，我的C代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    k = numsSize - k + <span class="number">1</span>;<span class="comment">//求第K大，我先把它转化为求第K小。。</span></span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = numsSize - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j, t, m;</span><br><span class="line">    <span class="keyword">while</span>(l &lt;= r) &#123;</span><br><span class="line">        i = l, j = r + <span class="number">1</span>;</span><br><span class="line">        t = nums[l];</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;<span class="keyword">while</span>(i &lt;= r &amp;&amp; nums[i] &lt; t);</span><br><span class="line">            <span class="keyword">do</span> &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;<span class="keyword">while</span>(nums[j] &gt; t);</span><br><span class="line">            <span class="keyword">if</span>(i &gt; j) <span class="keyword">break</span>;</span><br><span class="line">            m = nums[i]; nums[i] = nums[j]; nums[j] = m;</span><br><span class="line">        &#125;</span><br><span class="line">        m = nums[l]; nums[l] = nums[j]; nums[j] = m;</span><br><span class="line">        <span class="comment">//以上为一次快排的交换步骤</span></span><br><span class="line">        <span class="keyword">if</span>(j == k - <span class="number">1</span>) <span class="keyword">return</span> nums[j];<span class="comment">//如果j==k-1，说明左边有k-1个数，也就是它是第k小的数</span></span><br><span class="line">        <span class="keyword">if</span>(j &gt; k - <span class="number">1</span>) r = j - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> l = j + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的复杂度为 $O(n)$</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/07/chapter345/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          chapter345-3x+1，黑白球，日期函数，程序计时
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/05/chapter1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">bitset</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="chapter2" data-title="chapter2-翻转向量，变位词，第K大的元素" data-url="http://yoursite.com/2015/03/06/chapter2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"grubbyskyer"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 TIAN Xing
+    	</div>
+      	<div class="footer-right">
+      		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

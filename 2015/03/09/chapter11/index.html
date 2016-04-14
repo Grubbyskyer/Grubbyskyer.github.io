@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>chapter11-插入排序、快排 | Xing&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="插入排序思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。
+复杂度：共需从x[1]到x[n-1] (n-1)趟插入，每次插入需要移动的距离为O(n)，所以最终复杂度为$O(n^2)$ 空间上只需要O(1)的交换元素空间，是原地排序
+12345678void inse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chapter11-插入排序、快排">
+<meta property="og:url" content="http://yoursite.com/2015/03/09/chapter11/index.html">
+<meta property="og:site_name" content="Xing's Blog">
+<meta property="og:description" content="插入排序思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。
+复杂度：共需从x[1]到x[n-1] (n-1)趟插入，每次插入需要移动的距离为O(n)，所以最终复杂度为$O(n^2)$ 空间上只需要O(1)的交换元素空间，是原地排序
+12345678void inse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chapter11-插入排序、快排">
+<meta name="twitter:description" content="插入排序思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。
+复杂度：共需从x[1]到x[n-1] (n-1)趟插入，每次插入需要移动的距离为O(n)，所以最终复杂度为$O(n^2)$ 空间上只需要O(1)的交换元素空间，是原地排序
+12345678void inse">
+  
+    <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/author.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">TIAN Xing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/bitset/" style="font-size: 10px;">bitset</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">中南大学10级，现在本校读研。研究机器学习和自然语言处理相关算法。直男癌O^·^O死♂宅O^·^O极客范</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">TIAN Xing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/author.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">TIAN Xing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-chapter11" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/09/chapter11/" class="article-date">
+  	<time datetime="2015-03-09T13:06:53.000Z" itemprop="datePublished">Mar 9</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      chapter11-插入排序、快排
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="插入排序">插入排序</h1><p>思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。</p>
+<p>复杂度：共需从x[1]到x[n-1] (n-1)趟插入，每次插入需要移动的距离为O(n)，所以最终复杂度为$O(n^2)$ 空间上只需要O(1)的交换元素空间，是原地排序</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)<span class="comment">//将x[1]到x[n-1]依次插入</span></span><br><span class="line">        <span class="keyword">for</span> (j = i; j &gt; <span class="number">0</span> &amp;&amp; x[j] &lt; x[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">	        <span class="comment">//如果该元素比它前面的小，就交换，直到它找到自己在前面序列的位置</span></span><br><span class="line">            t = x[j]; x[j] = x[j - <span class="number">1</span>]; x[j - <span class="number">1</span>] = t;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出插入排序的主要时间都耗费在了内层循环元素的移动上，如果原本数组就是有序的，那么O(n)时间就完成了。因此在元素<strong>基本有序</strong>的情况下，插入排序的效率是比较高的。</p>
+<h1 id="快排">快排</h1><p>思路：快排的思想是对于一个数组x[l,r]，从中随机选取一个元素x[k]，然后把x中小于x[k]的元素都移到左边，大于等于x[k]的元素都移到右边，最终x[k]被移到了m位置，这样x[l,m-1]都小于x[m]，x[m+1,r]都大于等于x[m]。<br>接下来对于x[l,m-1]和x[m+1,r]再递归去排序，直到l&gt;=u证明数组中只有一个元素或没有元素则返回。</p>
+<p>复杂度：每次选完枢轴元素之后移动的次数为O(n)，之后分治，最坏情况下一端为空，另一端为n-1，这样最坏也是O(n)，所以最坏情况下复杂度为$O(n^2)$ 平均情况下为$O(nlogn)$ 空间上，程序本身没有申请新的空间，但是运行时平均需要$O(logn)$的栈空间，最坏需要$O(n)$的栈空间<br>$$<br>T(n) = 2T(\frac{n}{2}) + O(n) \<br>n^{log_b^a} = n^{log_2^2} = n = f(n) = O(n) \<br>T(n) = O(n^{log_b^a}logn) = O(nlogn)<br>$$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>; <span class="comment">//递归出口</span></span><br><span class="line">    <span class="keyword">int</span> i, m, t;</span><br><span class="line">    m = l;<span class="comment">//选取最左边的作为枢轴</span></span><br><span class="line">    <span class="keyword">for</span> (i = l + <span class="number">1</span>; i &lt;= r; i++)<span class="comment">//依次将后面的值与枢轴进行比较</span></span><br><span class="line">        <span class="keyword">if</span> (x[i] &lt; x[l]) &#123;<span class="comment">//如果比枢轴小 swap(++m, i); m存的是小于x[l]的元素的个数</span></span><br><span class="line">            t = x[++m]; x[m] = x[i]; x[i] = t;</span><br><span class="line">        &#125;</span><br><span class="line">    t = x[m]; x[m] = x[l]; x[l] = t;<span class="comment">//最终swap(l,m);</span></span><br><span class="line">    qsort(x, l, m - <span class="number">1</span>);</span><br><span class="line">    qsort(x, m + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每次都把x[m]“删除”了，所以肯定会终止。</p>
+<p>几点改进：</p>
+<ul>
+<li>从单向搜索改为双向搜索</li>
+<li>每次随机选取元素作为枢轴而不是最左边的</li>
+<li>对于小数组使用插入排序直接返回</li>
+</ul>
+<p>使用双向搜索，原来只是每次从前面找比枢轴小的，现在从前面找到第一个大于等于枢轴的，从后面找到第一个小于等于枢轴的，交换它们的值，直到这两个指针相遇<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    i = l; j = r + <span class="number">1</span>; <span class="comment">//注意i、j的初始化</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;<span class="comment">//为什么写成do while形式？因为交换完x[i]、x[j]的值，都要让i、j往前走一步，否则数组中有两个跟枢轴相等的，就死循环了</span></span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">while</span> (i &lt;= r &amp;&amp; x[i] &lt; x[l]);<span class="comment">//找到第一个大于等于x[l]</span></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125; <span class="keyword">while</span> (x[j] &gt; x[l]);<span class="comment">//找到第一个小于等于x[l]</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; j) <span class="keyword">break</span>;<span class="comment">//如果i、j相遇了就说明遍历完了，此时就不用swap(i,j)了</span></span><br><span class="line">        t = x[i]; x[i] = x[j]; x[j] = t;<span class="comment">//swap(i,j)</span></span><br><span class="line">    &#125;</span><br><span class="line">    t = x[l]; x[l] = x[j]; x[j] = t;</span><br><span class="line">    qsort(x, l, j - <span class="number">1</span>);</span><br><span class="line">    qsort(x, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每次随机选取一个元素做枢轴，方法就是swap(l, randint(l, u));<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bigrand</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RAND_MAX * rand() + rand();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">randint</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> l + bigrand() % (r - l + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    i = randint(l, r);</span><br><span class="line">    t = x[i]; x[i] = x[l]; x[l] = t;<span class="comment">//先随机找一个数与x[l]交换</span></span><br><span class="line">    i = l; j = r + <span class="number">1</span>; </span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>快排的很多时间都浪费在了对小数组的元素移动上，我们可以规定当l与u的差在一定范围内时，采用插入排序并返回。或者直接返回，最后再对整个数组做一次插入排序<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r - l &lt; cutoff) <span class="keyword">return</span>;<span class="comment">//cutoff一般可取30到50</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;<span class="comment">//此时数组并不是有序的 而是某些小片段整体小于它右边小片段这样的形式</span></span><br><span class="line">insertSort(x, n);<span class="comment">//调用一次插入排序对基本有序的数组进行排序</span></span><br></pre></td></tr></table></figure></p>
+<p>完整的一份代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdlib&gt; </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;ctime&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> cutoff 4</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//这里为了看到效果我把cutoff设为4</span></span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = i; j &gt; <span class="number">0</span> &amp;&amp; x[j] &lt; x[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">            t = x[j]; x[j] = x[j - <span class="number">1</span>]; x[j - <span class="number">1</span>] = t;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bigrand</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RAND_MAX * rand() + rand();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">randint</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> l + bigrand() % (r - l + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r - l &lt; cutoff) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    i = randint(l, r);</span><br><span class="line">    t = x[i]; x[i] = x[l]; x[l] = t;</span><br><span class="line">    i = l; j = r + <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">while</span> (i &lt;= r &amp;&amp; x[i] &lt; x[l]);</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125; <span class="keyword">while</span> (x[j] &gt; x[l]);</span><br><span class="line">        <span class="keyword">if</span> (i &gt; j) <span class="keyword">break</span>;</span><br><span class="line">        t = x[i]; x[i] = x[j]; x[j] = t;</span><br><span class="line">    &#125;</span><br><span class="line">    t = x[l]; x[l] = x[j]; x[j] = t;</span><br><span class="line">    qsort(x, l, j - <span class="number">1</span>);</span><br><span class="line">    qsort(x, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    srand((<span class="keyword">unsigned</span>)time(NULL));<span class="comment">//种子生成器，否则rand()一直不变</span></span><br><span class="line">    <span class="keyword">int</span> x[] = &#123;<span class="number">0</span>, -<span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    qsort(x, <span class="number">0</span>, <span class="number">8</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x[i]);<span class="comment">//可以看出调用完qsort数组并不是有序的</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    insertSort(x, <span class="number">9</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x[i]);<span class="comment">//最终数组有序</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//运行结果：</span></span><br><span class="line"><span class="comment">//-5 0 2 7 3 3 8 9 16</span></span><br><span class="line"><span class="comment">//-5 0 2 3 3 7 8 9 16</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/10/chapter12/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          chapter12-随机数，取样
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/08/chapter6-10/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">chapter6-10-估算，最大子向量和，最大子矩阵和，变进制表示</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="chapter11" data-title="chapter11-插入排序、快排" data-url="http://yoursite.com/2015/03/09/chapter11/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"grubbyskyer"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 TIAN Xing
+    	</div>
+      	<div class="footer-right">
+      		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

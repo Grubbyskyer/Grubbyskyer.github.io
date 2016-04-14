@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>chapter14-堆、优先队列 | Xing&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="堆排序主要是几个函数：
+
+pushdown(int rt, int n)表示对rt结点向下调整，n为堆的大小
+pullup(int rt)表示对rt结点向上调整
+build(int n)建堆过程
+heapSort(int n)堆排序函数
+
+pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#123;    int t, max;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chapter14-堆、优先队列">
+<meta property="og:url" content="http://yoursite.com/2015/03/11/chapter14/index.html">
+<meta property="og:site_name" content="Xing's Blog">
+<meta property="og:description" content="堆排序主要是几个函数：
+
+pushdown(int rt, int n)表示对rt结点向下调整，n为堆的大小
+pullup(int rt)表示对rt结点向上调整
+build(int n)建堆过程
+heapSort(int n)堆排序函数
+
+pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#123;    int t, max;">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chapter14-堆、优先队列">
+<meta name="twitter:description" content="堆排序主要是几个函数：
+
+pushdown(int rt, int n)表示对rt结点向下调整，n为堆的大小
+pullup(int rt)表示对rt结点向上调整
+build(int n)建堆过程
+heapSort(int n)堆排序函数
+
+pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#123;    int t, max;">
+  
+    <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/author.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">TIAN Xing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/bitset/" style="font-size: 10px;">bitset</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">中南大学10级，现在本校读研。研究机器学习和自然语言处理相关算法。直男癌O^·^O死♂宅O^·^O极客范</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">TIAN Xing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/author.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">TIAN Xing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-chapter14" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/11/chapter14/" class="article-date">
+  	<time datetime="2015-03-11T13:06:53.000Z" itemprop="datePublished">Mar 11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      chapter14-堆、优先队列
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="堆排序">堆排序</h1><p>主要是几个函数：</p>
+<ul>
+<li><code>pushdown(int rt, int n)</code>表示对rt结点向下调整，n为堆的大小</li>
+<li><code>pullup(int rt)</code>表示对rt结点向上调整</li>
+<li><code>build(int n)</code>建堆过程</li>
+<li><code>heapSort(int n)</code>堆排序函数</li>
+</ul>
+<p>pushdown的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, max;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        max = rt;<span class="comment">//先把当前结点赋给max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span>] &lt; x[rt]) max = rt &lt;&lt; <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] &lt; x[max]) max = rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前max结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> (max != rt) &#123;<span class="comment">//如果max！=rt说明存在一个左右孩子更小</span></span><br><span class="line">            t = x[max]; x[max] = x[rt]; x[rt] = t;</span><br><span class="line">            rt = max;<span class="comment">//把该左或右孩子赋给rt继续向下调整</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">break</span>;<span class="comment">//说明没有比它小的左右孩子，不需要向下调整了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>pullup的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullup</span><span class="params">(<span class="keyword">int</span> rt)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>, tmp;</span><br><span class="line">    <span class="keyword">while</span> (rt &gt; <span class="number">1</span> &amp;&amp; t != rt) &#123;<span class="comment">//如果t!=rt说明调整了则继续向上调整</span></span><br><span class="line">        t = rt;<span class="comment">//t保存当前结点</span></span><br><span class="line">        <span class="keyword">if</span> (x[rt] &lt; x[rt &gt;&gt; <span class="number">1</span>]) &#123;</span><br><span class="line">            tmp = x[rt]; x[rt] = x[rt &gt;&gt; <span class="number">1</span>]; x[rt &gt;&gt; <span class="number">1</span>] = tmp;</span><br><span class="line">            rt &gt;&gt;= <span class="number">1</span>;<span class="comment">//更新当前结点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>build建堆过程，从第n/2个结点倒着更新到第1个结点，因为堆中标号为1~n/2的结点才有孩子结点，必须要倒着更新，否则可能不满足堆的性质<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = n &gt;&gt; <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)<span class="comment">//倒着更新</span></span><br><span class="line">        pushdown(i, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或者这样也可以用pullup<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">		pullup(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>heapSort堆排序，每次都把x[1]和堆中最后一个元素交换，堆的大小减1，然后对结点1向下调整使其满足堆的性质，这样小根堆得到的是降序序列，大根堆得到的是升序序列<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, t;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;<span class="comment">//这里只需要n-1轮遍历，因为n-1轮之后堆的大小只剩1，就不用交换了</span></span><br><span class="line">        t = x[<span class="number">1</span>]; x[<span class="number">1</span>] = x[n - i]; x[n - i] = t;</span><br><span class="line">        pushdown(<span class="number">1</span>, n - i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试程序：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x[] = &#123;<span class="number">3</span>, -<span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">16</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    build(<span class="number">8</span>);</span><br><span class="line">    heapSort(<span class="number">8</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">9</span>; i++)<span class="comment">//x[0]没参与排序这里只对x[1-8]排序</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//运行结果：这里建的小根堆所以降序输出</span></span><br><span class="line"><span class="comment">//16 9 8 7 2 0 0 -5</span></span><br></pre></td></tr></table></figure></p>
+<p>复杂度：每次调整需$O(logn)$，共调整n次，复杂度$O(nlogn)$</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/12/chapter15/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          chapter15-字符串散列表
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/10/chapter12/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">chapter12-随机数，取样</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="chapter14" data-title="chapter14-堆、优先队列" data-url="http://yoursite.com/2015/03/11/chapter14/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"grubbyskyer"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 TIAN Xing
+    	</div>
+      	<div class="footer-right">
+      		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

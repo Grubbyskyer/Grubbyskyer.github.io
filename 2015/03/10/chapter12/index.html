@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>chapter12-随机数，取样 | Xing&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。
+
+首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;
+那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；选择1的时候，如果前面选了0，那么我们要以$\fra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chapter12-随机数，取样">
+<meta property="og:url" content="http://yoursite.com/2015/03/10/chapter12/index.html">
+<meta property="og:site_name" content="Xing's Blog">
+<meta property="og:description" content="Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。
+
+首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;
+那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；选择1的时候，如果前面选了0，那么我们要以$\fra">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="chapter12-随机数，取样">
+<meta name="twitter:description" content="Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。
+
+首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;
+那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；选择1的时候，如果前面选了0，那么我们要以$\fra">
+  
+    <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/author.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">TIAN Xing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/bitset/" style="font-size: 10px;">bitset</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">中南大学10级，现在本校读研。研究机器学习和自然语言处理相关算法。直男癌O^·^O死♂宅O^·^O极客范</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">TIAN Xing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/author.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">TIAN Xing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-chapter12" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/10/chapter12/" class="article-date">
+  	<time datetime="2015-03-10T13:06:53.000Z" itemprop="datePublished">Mar 10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      chapter12-随机数，取样
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。</p>
+</blockquote>
+<p>首先我们应该知道概率事件的计算机表示：<br>如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (bigrand() % n &lt; m)</span><br><span class="line">	<span class="keyword">do</span> A;</span><br></pre></td></tr></table></figure></p>
+<p>那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；<br>选择1的时候，如果前面选了0，那么我们要以$\frac{m-1}{n-1}$的概率选择1，如果没有选择0，那么我们以$\frac{m}{n-1}$的概率选择1。<br>也就是说，还需要选的元素个数我们记为select，从remaining个元素进行选择，那么选择的概率为$\frac{select}{remaining}$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, n, m;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	<span class="keyword">if</span> (bigrand() % (n - i) &lt; m) &#123;<span class="comment">//n-i是当前剩余总元素数，m为当前还需要选的元素个数</span></span><br><span class="line">		print i;</span><br><span class="line">		m--;<span class="comment">//如果选择了当前元素，则remaining--</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为按照i=[0,n-1]这样的顺序遍历了数组，所以最终输出的肯定是有序的，复杂度为$O(n)$，而且每次都是以$\frac{select}{remaining}$的概率选择当前元素，所以每个元素被选中的概率相等。<br>那么现在还剩下最后一个问题：该算法会准确的输出m个元素吗？<br>答案是肯定的。我们可以这样分析：如果已经选择了m个元素，那么m=0，if括号中的条件恒为假，剩下的元素肯定不会被选择，所以肯定不会多选；如果当n-i == m的时候，还没有选满，那么if中的条件恒为真，剩下的所有元素都会被选择，所以也不会少选。举个例子，n=400，m=20，假设前面380个数都没有被选择，那么到了倒数第20个数，n-i = 20，m=20，剩下的20个数都会被选择。</p>
+<p>另一种方法是，将n个数随即打乱，然后取前m个数，再排序输出<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	swap(i, randint(i, n - <span class="number">1</span>));</span><br><span class="line">sort(x, x + m);</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">	print x[i]</span><br></pre></td></tr></table></figure></p>
+<p>这样的复杂度为$O(n + mlogm)$，注意其中的交换函数</p>
+<p>还有一种解决方案是用set，每次随机从0~n-1中选一个数放入set，直到set的size达到m。由于set每次插入的复杂度为$O(logm)$，所以总复杂度为$O(mlogm)$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line"><span class="keyword">while</span> (s.size() &lt; m)</span><br><span class="line">	s.insert(bigrand() % n);</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"><span class="keyword">for</span> (it = s.begin(); it != s.end(); it++)</span><br><span class="line">	print *it</span><br></pre></td></tr></table></figure></p>
+<p>但是这样有一点问题，就是当m和n比较接近的时候，越到后面重复的概率越高，会产生很多次浪费，一个改进的算法是：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator it;</span><br><span class="line"><span class="keyword">int</span> j, t;</span><br><span class="line"><span class="keyword">for</span> (j = n- m; j &lt; n; j++) &#123;</span><br><span class="line">	t = bigrand() % (j + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span> (s.find(t) == s.end())</span><br><span class="line">		s.insert(t);<span class="comment">// t not in s</span></span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		s.insert(j);<span class="comment">// t in s</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (it = s.begin(); it != s.end(); it++)</span><br><span class="line">	print *it</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Q2：rand7() 到 rand5()、rand10()</p>
+</blockquote>
+<p>rand7()能随机返回1-7这7个整数中的一个，根据rand7()编写对应的rand5()和rand10()。<br>rand5()比较简单<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		res = rand7();</span><br><span class="line">	&#125; <span class="keyword">while</span> (res &gt;= <span class="number">6</span>);<span class="comment">//取出来6或者7就重取，1-5的概率是相等的</span></span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>rand10()稍微复杂一点：rand5()可以等概率返回1-5，那么rand5() + 5可以等概率返回6-10，把它们视为两个整体，现在只需要等概率返回这两个整体即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rand5</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res, t;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		res = rand7();</span><br><span class="line">	&#125; <span class="keyword">while</span> (res &gt;= <span class="number">6</span>);<span class="comment">//取出来6或者7就重取，1-5的概率是相等的</span></span><br><span class="line">	<span class="comment">//做一个1/2的概率生成器，最简单的利用奇偶性</span></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		t = rand7();</span><br><span class="line">	&#125; <span class="keyword">while</span> (res == <span class="number">7</span>);<span class="comment">//t为1-6，奇偶数相同各3个</span></span><br><span class="line">	res += <span class="number">5</span> * (t &amp; <span class="number">1</span>);<span class="comment">//t为0或1，即res有1/2的概率+5</span></span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Q3：赠券收集者问题</p>
+</blockquote>
+<p>一套卡片总共有n张，分别是n种类型，这里假定每种类型卡片数量相等（被取到的概率一致），问收集齐整套卡片需要多少张卡片？</p>
+<p>首先，买第一种卡片，这张肯定是原来没有的，概率为1；（这里第一种不是指0~n-1中的第0种，而是你收集的卡片的第一种，下同）<br>买第二种卡片时候，不能跟第一次重复，概率为$\frac{n-1}{n}$<br>买第三种，不能跟前两次重复，概率为$\frac{n-2}{n}$<br>…<br>买第n种，不能跟前面n-1种重复，概率为$\frac{1}{n}$<br>亦即$p_i = \frac{n + 1 - i}{n}$，而期望$E_i = \frac{1}{p_i} = \frac{n}{n + 1 - i}$<br>则$$sum = \sum_{i = 1}^n E_i = n (1 + \frac{1}{2} + \frac{1}{3} + \cdots +\frac{1}{n})$$<br>后面那一堆是调和级数，是发散的，和大约为<br>$ln(n + 1) + r \ (r \approx 0.5772156649)$<br>所以总和$sum \approx nlnn$</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/03/11/chapter14/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          chapter14-堆、优先队列
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/09/chapter11/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">chapter11-插入排序、快排</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="chapter12" data-title="chapter12-随机数，取样" data-url="http://yoursite.com/2015/03/10/chapter12/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"grubbyskyer"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 TIAN Xing
+    	</div>
+      	<div class="footer-right">
+      		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

@@ -109,7 +109,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/bitset/" style="font-size: 10px;">bitset</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
 					</div>
 				</section>
 				
@@ -683,13 +683,147 @@
 
 
   
+    <article id="post-chapter15" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/12/chapter15/" class="article-date">
+  	<time datetime="2015-03-12T13:06:53.000Z" itemprop="datePublished">Mar 12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/12/chapter15/">chapter15-字符串散列表</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。</p>
+</blockquote>
+<p>散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。</p>
+<p>我们用跟29131最接近的质数29989作为散列表的大小，用31作为字符串哈希函数的乘数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">char</span> *p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> h = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( ; *p; p++)</span><br><span class="line">        h = MULT * h + *p;</span><br><span class="line">    <span class="keyword">return</span> h % NHASH;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>增加单词时，先计算该字符串的哈希值，找到对应的数组中的位置，然后沿这个链表往下找，直到找到该单词，把它的count加一，或者没有找到，就新建一个结点初始化信息，把bin[h]设为它的next，最后把它设为bin[h]，也就是说它放在数组里，原来的链表往后挪<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">incword</span><span class="params">(<span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash(s);<span class="comment">//先计算hash值</span></span><br><span class="line">    nodeptr p;</span><br><span class="line">    <span class="keyword">for</span> (p = bin[h]; p != NULL; p = p-&gt;next)<span class="comment">//在对应的链表上搜索</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(p-&gt;word, s) == <span class="number">0</span>) &#123;<span class="comment">//如果找到就更新count然后返回</span></span><br><span class="line">            (p-&gt;count)++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    p = (nodeptr)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));<span class="comment">//没有找到就新建一个结点申请内存</span></span><br><span class="line">    p-&gt;count = <span class="number">1</span>;</span><br><span class="line">    p-&gt;word = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(p-&gt;word, s);</span><br><span class="line">    p-&gt;next = bin[h];<span class="comment">//把bin[h](也就是原来数组里的结点，可能有也可能为NULL)设为该结点的next</span></span><br><span class="line">    bin[h] = p;<span class="comment">//把该结点放到bin数组里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>完整的程序：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdlib&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> NHASH 29989</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MULT 31</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> node *nodeptr;</span><br><span class="line"><span class="keyword">struct</span> node</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> *word;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line">    nodeptr next;</span><br><span class="line">&#125;;</span><br><span class="line">nodeptr bin[NHASH];</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">char</span> *p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> h = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( ; *p; p++)</span><br><span class="line">        h = MULT * h + *p;</span><br><span class="line">    <span class="keyword">return</span> h % NHASH;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">incword</span><span class="params">(<span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash(s);</span><br><span class="line">    nodeptr p;</span><br><span class="line">    <span class="keyword">for</span> (p = bin[h]; p != NULL; p = p-&gt;next)</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(p-&gt;word, s) == <span class="number">0</span>) &#123;</span><br><span class="line">            (p-&gt;count)++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    p = (nodeptr)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));</span><br><span class="line">    p-&gt;count = <span class="number">1</span>;</span><br><span class="line">    p-&gt;word = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(p-&gt;word, s);</span><br><span class="line">    p-&gt;next = bin[h];</span><br><span class="line">    bin[h] = p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">50</span>];</span><br><span class="line">    nodeptr p;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; NHASH; i++) </span><br><span class="line">        bin[i] = NULL;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf))</span><br><span class="line">        incword(buf);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; NHASH; i++) </span><br><span class="line">        <span class="keyword">for</span> (p = bin[i]; p != NULL; p = p-&gt;next)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%s count=%d i=%d\n"</span>, p-&gt;word, p-&gt;count, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输入：</span></span><br><span class="line"><span class="comment">//ask not what your country can do for you</span></span><br><span class="line"><span class="comment">//but what you can do for your country</span></span><br><span class="line"><span class="comment">//^Z</span></span><br><span class="line"><span class="comment">//输出：</span></span><br><span class="line"><span class="comment">//do count=2 i=3211</span></span><br><span class="line"><span class="comment">//ask count=1 i=6922</span></span><br><span class="line"><span class="comment">//but count=1 i=7954</span></span><br><span class="line"><span class="comment">//can count=2 i=8289</span></span><br><span class="line"><span class="comment">//for count=2 i=11610</span></span><br><span class="line"><span class="comment">//country count=2 i=12391</span></span><br><span class="line"><span class="comment">//not count=1 i=19300</span></span><br><span class="line"><span class="comment">//what count=2 i=19527</span></span><br><span class="line"><span class="comment">//your count=2 i=26476</span></span><br><span class="line"><span class="comment">//you count=2 i=29872</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-chapter14" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/11/chapter14/" class="article-date">
+  	<time datetime="2015-03-11T13:06:53.000Z" itemprop="datePublished">Mar 11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/11/chapter14/">chapter14-堆、优先队列</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="堆排序">堆排序</h1><p>主要是几个函数：</p>
+<ul>
+<li><code>pushdown(int rt, int n)</code>表示对rt结点向下调整，n为堆的大小</li>
+<li><code>pullup(int rt)</code>表示对rt结点向上调整</li>
+<li><code>build(int n)</code>建堆过程</li>
+<li><code>heapSort(int n)</code>堆排序函数</li>
+</ul>
+<p>pushdown的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, max;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        max = rt;<span class="comment">//先把当前结点赋给max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span>] &lt; x[rt]) max = rt &lt;&lt; <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] &lt; x[max]) max = rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前max结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> (max != rt) &#123;<span class="comment">//如果max！=rt说明存在一个左右孩子更小</span></span><br><span class="line">            t = x[max]; x[max] = x[rt]; x[rt] = t;</span><br><span class="line">            rt = max;<span class="comment">//把该左或右孩子赋给rt继续向下调整</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">break</span>;<span class="comment">//说明没有比它小的左右孩子，不需要向下调整了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>pullup的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullup</span><span class="params">(<span class="keyword">int</span> rt)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>, tmp;</span><br><span class="line">    <span class="keyword">while</span> (rt &gt; <span class="number">1</span> &amp;&amp; t != rt) &#123;<span class="comment">//如果t!=rt说明调整了则继续向上调整</span></span><br><span class="line">        t = rt;<span class="comment">//t保存当前结点</span></span><br><span class="line">        <span class="keyword">if</span> (x[rt] &lt; x[rt &gt;&gt; <span class="number">1</span>]) &#123;</span><br><span class="line">            tmp = x[rt]; x[rt] = x[rt &gt;&gt; <span class="number">1</span>]; x[rt &gt;&gt; <span class="number">1</span>] = tmp;</span><br><span class="line">            rt &gt;&gt;= <span class="number">1</span>;<span class="comment">//更新当前结点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>build建堆过程，从第n/2个结点倒着更新到第1个结点，因为堆中标号为1~n/2的结点才有孩子结点，必须要倒着更新，否则可能不满足堆的性质<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = n &gt;&gt; <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)<span class="comment">//倒着更新</span></span><br><span class="line">        pushdown(i, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>或者这样也可以用pullup<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build2</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= n; i++)</span><br><span class="line">		pullup(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>heapSort堆排序，每次都把x[1]和堆中最后一个元素交换，堆的大小减1，然后对结点1向下调整使其满足堆的性质，这样小根堆得到的是降序序列，大根堆得到的是升序序列<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, t;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; i++) &#123;<span class="comment">//这里只需要n-1轮遍历，因为n-1轮之后堆的大小只剩1，就不用交换了</span></span><br><span class="line">        t = x[<span class="number">1</span>]; x[<span class="number">1</span>] = x[n - i]; x[n - i] = t;</span><br><span class="line">        pushdown(<span class="number">1</span>, n - i - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试程序：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> x[] = &#123;<span class="number">3</span>, -<span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">16</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    build(<span class="number">8</span>);</span><br><span class="line">    heapSort(<span class="number">8</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">9</span>; i++)<span class="comment">//x[0]没参与排序这里只对x[1-8]排序</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//运行结果：这里建的小根堆所以降序输出</span></span><br><span class="line"><span class="comment">//16 9 8 7 2 0 0 -5</span></span><br></pre></td></tr></table></figure></p>
+<p>复杂度：每次调整需$O(logn)$，共调整n次，复杂度$O(nlogn)$</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 </div>
       <footer id="footer">
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 TIAN Xing
+    		&copy; 2016 TIAN Xing
     	</div>
       	<div class="footer-right">
       		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
