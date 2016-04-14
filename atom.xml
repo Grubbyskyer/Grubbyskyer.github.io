@@ -621,11 +621,12 @@
     <link href="http://yoursite.com/2015/03/12/chapter15/"/>
     <id>http://yoursite.com/2015/03/12/chapter15/</id>
     <published>2015-03-12T13:06:53.000Z</published>
-    <updated>2016-04-14T17:05:10.866Z</updated>
+    <updated>2016-04-14T17:35:50.155Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。</p>
 </blockquote>
 <p>散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。</p>
+<a id="more"></a>
 <p>我们用跟29131最接近的质数29989作为散列表的大小，用31作为字符串哈希函数的乘数。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">char</span> *p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> h = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( ; *p; p++)</span><br><span class="line">        h = MULT * h + *p;</span><br><span class="line">    <span class="keyword">return</span> h % NHASH;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>增加单词时，先计算该字符串的哈希值，找到对应的数组中的位置，然后沿这个链表往下找，直到找到该单词，把它的count加一，或者没有找到，就新建一个结点初始化信息，把bin[h]设为它的next，最后把它设为bin[h]，也就是说它放在数组里，原来的链表往后挪<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">incword</span><span class="params">(<span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash(s);<span class="comment">//先计算hash值</span></span><br><span class="line">    nodeptr p;</span><br><span class="line">    <span class="keyword">for</span> (p = bin[h]; p != NULL; p = p-&gt;next)<span class="comment">//在对应的链表上搜索</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(p-&gt;word, s) == <span class="number">0</span>) &#123;<span class="comment">//如果找到就更新count然后返回</span></span><br><span class="line">            (p-&gt;count)++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    p = (nodeptr)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));<span class="comment">//没有找到就新建一个结点申请内存</span></span><br><span class="line">    p-&gt;count = <span class="number">1</span>;</span><br><span class="line">    p-&gt;word = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(p-&gt;word, s);</span><br><span class="line">    p-&gt;next = bin[h];<span class="comment">//把bin[h](也就是原来数组里的结点，可能有也可能为NULL)设为该结点的next</span></span><br><span class="line">    bin[h] = p;<span class="comment">//把该结点放到bin数组里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -636,6 +637,7 @@
 <p>实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。</p>
 </blockquote>
 <p>散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。</p>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -647,7 +649,7 @@
     <link href="http://yoursite.com/2015/03/11/chapter14/"/>
     <id>http://yoursite.com/2015/03/11/chapter14/</id>
     <published>2015-03-11T13:06:53.000Z</published>
-    <updated>2016-04-14T17:05:04.421Z</updated>
+    <updated>2016-04-14T17:35:41.168Z</updated>
     <content type="html"><![CDATA[<h1 id="堆排序">堆排序</h1><p>主要是几个函数：</p>
 <ul>
 <li><code>pushdown(int rt, int n)</code>表示对rt结点向下调整，n为堆的大小</li>
@@ -655,6 +657,7 @@
 <li><code>build(int n)</code>建堆过程</li>
 <li><code>heapSort(int n)</code>堆排序函数</li>
 </ul>
+<a id="more"></a>
 <p>pushdown的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, max;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        max = rt;<span class="comment">//先把当前结点赋给max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span>] &lt; x[rt]) max = rt &lt;&lt; <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] &lt; x[max]) max = rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前max结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> (max != rt) &#123;<span class="comment">//如果max！=rt说明存在一个左右孩子更小</span></span><br><span class="line">            t = x[max]; x[max] = x[rt]; x[rt] = t;</span><br><span class="line">            rt = max;<span class="comment">//把该左或右孩子赋给rt继续向下调整</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">break</span>;<span class="comment">//说明没有比它小的左右孩子，不需要向下调整了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>pullup的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullup</span><span class="params">(<span class="keyword">int</span> rt)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>, tmp;</span><br><span class="line">    <span class="keyword">while</span> (rt &gt; <span class="number">1</span> &amp;&amp; t != rt) &#123;<span class="comment">//如果t!=rt说明调整了则继续向上调整</span></span><br><span class="line">        t = rt;<span class="comment">//t保存当前结点</span></span><br><span class="line">        <span class="keyword">if</span> (x[rt] &lt; x[rt &gt;&gt; <span class="number">1</span>]) &#123;</span><br><span class="line">            tmp = x[rt]; x[rt] = x[rt &gt;&gt; <span class="number">1</span>]; x[rt &gt;&gt; <span class="number">1</span>] = tmp;</span><br><span class="line">            rt &gt;&gt;= <span class="number">1</span>;<span class="comment">//更新当前结点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>build建堆过程，从第n/2个结点倒着更新到第1个结点，因为堆中标号为1~n/2的结点才有孩子结点，必须要倒着更新，否则可能不满足堆的性质<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = n &gt;&gt; <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)<span class="comment">//倒着更新</span></span><br><span class="line">        pushdown(i, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -667,7 +670,11 @@
     <![CDATA[<h1 id="堆排序">堆排序</h1><p>主要是几个函数：</p>
 <ul>
 <li><code>pushdown(int rt, int n)</code>表示对rt结点向下调整，n为堆的大小</li>
-<li><code>pullup(int rt)</code>表示对]]>
+<li><code>pullup(int rt)</code>表示对rt结点向上调整</li>
+<li><code>build(int n)</code>建堆过程</li>
+<li><code>heapSort(int n)</code>堆排序函数</li>
+</ul>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -679,11 +686,12 @@
     <link href="http://yoursite.com/2015/03/10/chapter12/"/>
     <id>http://yoursite.com/2015/03/10/chapter12/</id>
     <published>2015-03-10T13:06:53.000Z</published>
-    <updated>2016-04-14T17:25:59.742Z</updated>
+    <updated>2016-04-14T17:35:32.717Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。</p>
 </blockquote>
 <p>首先我们应该知道概率事件的计算机表示：<br>如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (bigrand() % n &lt; m)</span><br><span class="line">	<span class="keyword">do</span> A;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；<br>选择1的时候，如果前面选了0，那么我们要以$\frac{m-1}{n-1}$的概率选择1，如果没有选择0，那么我们以$\frac{m}{n-1}$的概率选择1。<br>也就是说，还需要选的元素个数我们记为select，从remaining个元素进行选择，那么选择的概率为$\frac{select}{remaining}$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, n, m;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	<span class="keyword">if</span> (bigrand() % (n - i) &lt; m) &#123;<span class="comment">//n-i是当前剩余总元素数，m为当前还需要选的元素个数</span></span><br><span class="line">		print i;</span><br><span class="line">		m--;<span class="comment">//如果选择了当前元素，则remaining--</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 <p>因为按照i=[0,n-1]这样的顺序遍历了数组，所以最终输出的肯定是有序的，复杂度为$O(n)$，而且每次都是以$\frac{select}{remaining}$的概率选择当前元素，所以每个元素被选中的概率相等。<br>那么现在还剩下最后一个问题：该算法会准确的输出m个元素吗？<br>答案是肯定的。我们可以这样分析：如果已经选择了m个元素，那么m=0，if括号中的条件恒为假，剩下的元素肯定不会被选择，所以肯定不会多选；如果当n-i == m的时候，还没有选满，那么if中的条件恒为真，剩下的所有元素都会被选择，所以也不会少选。举个例子，n=400，m=20，假设前面380个数都没有被选择，那么到了倒数第20个数，n-i = 20，m=20，剩下的20个数都会被选择。</p>
 <p>另一种方法是，将n个数随即打乱，然后取前m个数，再排序输出<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	swap(i, randint(i, n - <span class="number">1</span>));</span><br><span class="line">sort(x, x + m);</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">	print x[i]</span><br></pre></td></tr></table></figure></p>
@@ -705,7 +713,8 @@
     <![CDATA[<blockquote>
 <p>Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。</p>
 </blockquote>
-<p>首先我们应该知道概率事件的计算机表示：<br>如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：<br><figu]]>
+<p>首先我们应该知道概率事件的计算机表示：<br>如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (bigrand() % n &lt; m)</span><br><span class="line">	<span class="keyword">do</span> A;</span><br></pre></td></tr></table></figure></p>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -717,8 +726,9 @@
     <link href="http://yoursite.com/2015/03/09/chapter11/"/>
     <id>http://yoursite.com/2015/03/09/chapter11/</id>
     <published>2015-03-09T13:06:53.000Z</published>
-    <updated>2016-04-14T17:04:47.486Z</updated>
+    <updated>2016-04-14T17:35:24.426Z</updated>
     <content type="html"><![CDATA[<h1 id="插入排序">插入排序</h1><p>思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。</p>
+<a id="more"></a>
 <p>复杂度：共需从x[1]到x[n-1] (n-1)趟插入，每次插入需要移动的距离为O(n)，所以最终复杂度为$O(n^2)$ 空间上只需要O(1)的交换元素空间，是原地排序</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)<span class="comment">//将x[1]到x[n-1]依次插入</span></span><br><span class="line">        <span class="keyword">for</span> (j = i; j &gt; <span class="number">0</span> &amp;&amp; x[j] &lt; x[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">	        <span class="comment">//如果该元素比它前面的小，就交换，直到它找到自己在前面序列的位置</span></span><br><span class="line">            t = x[j]; x[j] = x[j - <span class="number">1</span>]; x[j - <span class="number">1</span>] = t;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看出插入排序的主要时间都耗费在了内层循环元素的移动上，如果原本数组就是有序的，那么O(n)时间就完成了。因此在元素<strong>基本有序</strong>的情况下，插入排序的效率是比较高的。</p>
@@ -738,8 +748,8 @@
 <p>完整的一份代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdlib&gt; </span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;ctime&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> cutoff 4</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//这里为了看到效果我把cutoff设为4</span></span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)</span><br><span class="line">        <span class="keyword">for</span> (j = i; j &gt; <span class="number">0</span> &amp;&amp; x[j] &lt; x[j - <span class="number">1</span>]; j--) &#123;</span><br><span class="line">            t = x[j]; x[j] = x[j - <span class="number">1</span>]; x[j - <span class="number">1</span>] = t;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bigrand</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> RAND_MAX * rand() + rand();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">randint</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> l + bigrand() % (r - l + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">qsort</span><span class="params">(<span class="keyword">int</span> x[], <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (r - l &lt; cutoff) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i, j, t;</span><br><span class="line">    i = randint(l, r);</span><br><span class="line">    t = x[i]; x[i] = x[l]; x[l] = t;</span><br><span class="line">    i = l; j = r + <span class="number">1</span>; </span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125; <span class="keyword">while</span> (i &lt;= r &amp;&amp; x[i] &lt; x[l]);</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125; <span class="keyword">while</span> (x[j] &gt; x[l]);</span><br><span class="line">        <span class="keyword">if</span> (i &gt; j) <span class="keyword">break</span>;</span><br><span class="line">        t = x[i]; x[i] = x[j]; x[j] = t;</span><br><span class="line">    &#125;</span><br><span class="line">    t = x[l]; x[l] = x[j]; x[j] = t;</span><br><span class="line">    qsort(x, l, j - <span class="number">1</span>);</span><br><span class="line">    qsort(x, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    srand((<span class="keyword">unsigned</span>)time(NULL));<span class="comment">//种子生成器，否则rand()一直不变</span></span><br><span class="line">    <span class="keyword">int</span> x[] = &#123;<span class="number">0</span>, -<span class="number">5</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">16</span>&#125;;</span><br><span class="line">    qsort(x, <span class="number">0</span>, <span class="number">8</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x[i]);<span class="comment">//可以看出调用完qsort数组并不是有序的</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    insertSort(x, <span class="number">9</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, x[i]);<span class="comment">//最终数组有序</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//运行结果：</span></span><br><span class="line"><span class="comment">//-5 0 2 7 3 3 8 9 16</span></span><br><span class="line"><span class="comment">//-5 0 2 3 3 7 8 9 16</span></span><br></pre></td></tr></table></figure></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="插入排序">插入排序</h1><p>思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。</p>
-<p>复杂度：共需从x[1]到x[]]>
+    <![CDATA[<h1 id="插入排序">插入排序</h1><p>思路：给定一个数组x[0,n)，我们先把x[0…0]视为有序序列，插入x[1]，然后把x[0…1]视为有序序列，插入x[2]，…，最后把x[0…n-2]视为有序序列，插入x[n-1]。</p>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -751,13 +761,14 @@
     <link href="http://yoursite.com/2015/03/08/chapter6-10/"/>
     <id>http://yoursite.com/2015/03/08/chapter6-10/</id>
     <published>2015-03-08T13:06:53.000Z</published>
-    <updated>2016-04-14T17:04:37.060Z</updated>
+    <updated>2016-04-14T17:35:16.151Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>72法则</p>
 </blockquote>
 <p>假如以年利率r%投资一笔钱y年，那么当r * y = 72时，那么这笔钱差不多要翻倍。</p>
 <p>6%增长率，12年后翻倍<br>8%增长率，9年后翻倍</p>
 <p>当r在5%和10%之间，72法则的误差率小于1%</p>
+<a id="more"></a>
 <blockquote>
 <p>给出一个n维向量，找出它的一个子向量x[i…j]，令其中元素的和最大</p>
 </blockquote>
@@ -787,7 +798,8 @@
 </blockquote>
 <p>假如以年利率r%投资一笔钱y年，那么当r * y = 72时，那么这笔钱差不多要翻倍。</p>
 <p>6%增长率，12年后翻倍<br>8%增长率，9年后翻倍</p>
-<p>当r在5%和10%之间，]]>
+<p>当r在5%和10%之间，72法则的误差率小于1%</p>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -799,11 +811,12 @@
     <link href="http://yoursite.com/2015/03/07/chapter345/"/>
     <id>http://yoursite.com/2015/03/07/chapter345/</id>
     <published>2015-03-07T13:06:53.000Z</published>
-    <updated>2016-04-14T17:04:25.126Z</updated>
+    <updated>2016-04-14T17:36:03.280Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Q1：x为一个正整数，若x是偶数，则x = x / 2；若x为奇数（&gt;1的奇数），则x = 3x + 1；则最终x为1</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (x != <span class="number">1</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (even(x))</span><br><span class="line">		x = x / <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		x = <span class="number">3</span> * x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>这个程序会终止，证明？</p>
 <blockquote>
 <p>Q2：一个罐子里有黑白豆，每次取两个，若为同色，就扔掉并再放一个黑球，若异色，就都扔掉再放一个白的。证明该过程会终止，并求最终球的颜色。</p>
@@ -828,7 +841,8 @@
     <![CDATA[<blockquote>
 <p>Q1：x为一个正整数，若x是偶数，则x = x / 2；若x为奇数（&gt;1的奇数），则x = 3x + 1；则最终x为1</p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><t]]>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (x != <span class="number">1</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (even(x))</span><br><span class="line">		x = x / <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		x = <span class="number">3</span> * x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -840,10 +854,11 @@
     <link href="http://yoursite.com/2015/03/06/chapter2/"/>
     <id>http://yoursite.com/2015/03/06/chapter2/</id>
     <published>2015-03-06T13:06:53.000Z</published>
-    <updated>2016-04-14T17:04:14.481Z</updated>
+    <updated>2016-04-14T17:35:04.363Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 </p>
 </blockquote>
+<a id="more"></a>
 <p>思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = l, m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> t;</span><br><span class="line">    <span class="keyword">for</span> (i = l; i &lt;= m; i++) &#123;</span><br><span class="line">        t = s[i]; s[i] = s[r - i + l]; s[r - i + l] = t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%s"</span>, s)) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i);</span><br><span class="line">        n = <span class="built_in">strlen</span>(s);</span><br><span class="line">        reverse(<span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">        reverse(i, n - <span class="number">1</span>);</span><br><span class="line">        reverse(<span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么转置一个m * n的矩阵呢？<br>也可以先按行互换，然后再按列互换，也是一种思路。</p>
@@ -866,9 +881,8 @@
     <summary type="html">
     <![CDATA[<blockquote>
 <p>Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 </p>
-</blockquote>
-<p>思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。</p>
-<fig]]>
+</blockquote>]]>
+    
     </summary>
     
       <category term="编程珠玑" scheme="http://yoursite.com/categories/%E7%BC%96%E7%A8%8B%E7%8F%A0%E7%8E%91/"/>
@@ -880,9 +894,10 @@
     <link href="http://yoursite.com/2015/03/05/chapter1/"/>
     <id>http://yoursite.com/2015/03/05/chapter1/</id>
     <published>2015-03-05T13:06:53.000Z</published>
-    <updated>2016-04-14T17:03:59.811Z</updated>
+    <updated>2016-04-14T17:34:52.041Z</updated>
     <content type="html"><![CDATA[<p>条件：内存很少（约1MB），最多有1000万个数，所有数的范围都在0-1000万，没有重复数字</p>
 <p>分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数</p>
+<a id="more"></a>
 <p>关键：使用位运算进行编码和解码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> BITSPERWORD 32</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MASK 0x1f</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> SHIFT 5</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> N 10000000</span></span><br><span class="line"><span class="keyword">int</span> x[N/BITSPERWORD + <span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    x[i&gt;&gt;SHIFT] |= (<span class="number">1</span>&lt;&lt;(i&amp;MASK));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clr</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    x[i&gt;&gt;SHIFT] &amp;= ~(<span class="number">1</span>&lt;&lt;(i&amp;MASK));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x[i&gt;&gt;SHIFT] &amp; (<span class="number">1</span>&lt;&lt;(i&amp;MASK));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        clr(i);</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i))</span><br><span class="line">        <span class="built_in">set</span>(i);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        <span class="keyword">if</span> (test(i))</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>解释一下这个程序，它是一个int表示32个数，所以在操作的时候，先 i / 32 找到i在数组x中的存储位置，然后i % 32 找到i在这个int中存在第几位。<br>i &gt;&gt; SHIFT 右移5位，就相当于i / 32 找到在x中的位置<br>i &amp; MASK 与0000 0000 0000 0000 0000 0000 0001 1111做与运算，意思就是只保留最后5位二进制，相当于 i % 32，就跟我们常用i &amp; 1判断是不是奇数一个道理</p>
@@ -891,8 +906,8 @@
 ]]></content>
     <summary type="html">
     <![CDATA[<p>条件：内存很少（约1MB），最多有1000万个数，所有数的范围都在0-1000万，没有重复数字</p>
-<p>分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数</p>
-]]>
+<p>分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数</p>]]>
+    
     </summary>
     
       <category term="bitset" scheme="http://yoursite.com/tags/bitset/"/>

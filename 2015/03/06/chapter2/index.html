@@ -5,24 +5,15 @@
   
   <title>chapter2-翻转向量，变位词，第K大的元素 | Xing&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 
-
-思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。
-12345678910111213141516171819202122#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt;char s[100];void reverse">
+  <meta name="description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chapter2-翻转向量，变位词，第K大的元素">
 <meta property="og:url" content="http://yoursite.com/2015/03/06/chapter2/index.html">
 <meta property="og:site_name" content="Xing's Blog">
-<meta property="og:description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 
-
-思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。
-12345678910111213141516171819202122#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt;char s[100];void reverse">
+<meta property="og:description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chapter2-翻转向量，变位词，第K大的元素">
-<meta name="twitter:description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 
-
-思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。
-12345678910111213141516171819202122#include&amp;lt;cstdio&amp;gt;#include&amp;lt;cstring&amp;gt;char s[100];void reverse">
+<meta name="twitter:description" content="Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。">
   
     <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
   
@@ -222,6 +213,7 @@
         <blockquote>
 <p>Q1：将一个n元一维向量向左旋转i个位置，也就是循环左移。例如：n=8，i=3时，abcdefgh翻转为defghabc。 </p>
 </blockquote>
+<a id="more"></a>
 <p>思路：利用 $BA = (A^TB^T)^T$ 进行翻转即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = l, m = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> t;</span><br><span class="line">    <span class="keyword">for</span> (i = l; i &lt;= m; i++) &#123;</span><br><span class="line">        t = s[i]; s[i] = s[r - i + l]; s[r - i + l] = t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%s"</span>, s)) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i);</span><br><span class="line">        n = <span class="built_in">strlen</span>(s);</span><br><span class="line">        reverse(<span class="number">0</span>, i - <span class="number">1</span>);</span><br><span class="line">        reverse(i, n - <span class="number">1</span>);</span><br><span class="line">        reverse(<span class="number">0</span>, n - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么转置一个m * n的矩阵呢？<br>也可以先按行互换，然后再按列互换，也是一种思路。</p>

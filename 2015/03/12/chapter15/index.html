@@ -7,25 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。
 
-散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。
-我们用跟29131最接近的质数29989作为散列表的大小，用31作为字符串哈希函数的乘数。
-123456unsigned int hash(char *p) &amp;#123;    unsigned i">
+散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chapter15-字符串散列表">
 <meta property="og:url" content="http://yoursite.com/2015/03/12/chapter15/index.html">
 <meta property="og:site_name" content="Xing's Blog">
 <meta property="og:description" content="实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。
 
-散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。
-我们用跟29131最接近的质数29989作为散列表的大小，用31作为字符串哈希函数的乘数。
-123456unsigned int hash(char *p) &amp;#123;    unsigned i">
+散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chapter15-字符串散列表">
 <meta name="twitter:description" content="实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。
 
-散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。
-我们用跟29131最接近的质数29989作为散列表的大小，用31作为字符串哈希函数的乘数。
-123456unsigned int hash(char *p) &amp;#123;    unsigned i">
+散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。">
   
     <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
   
@@ -226,6 +220,7 @@
 <p>实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。</p>
 </blockquote>
 <p>散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。</p>
+<a id="more"></a>
 <p>我们用跟29131最接近的质数29989作为散列表的大小，用31作为字符串哈希函数的乘数。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">char</span> *p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> h = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( ; *p; p++)</span><br><span class="line">        h = MULT * h + *p;</span><br><span class="line">    <span class="keyword">return</span> h % NHASH;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>增加单词时，先计算该字符串的哈希值，找到对应的数组中的位置，然后沿这个链表往下找，直到找到该单词，把它的count加一，或者没有找到，就新建一个结点初始化信息，把bin[h]设为它的next，最后把它设为bin[h]，也就是说它放在数组里，原来的链表往后挪<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">incword</span><span class="params">(<span class="keyword">char</span> *s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h = hash(s);<span class="comment">//先计算hash值</span></span><br><span class="line">    nodeptr p;</span><br><span class="line">    <span class="keyword">for</span> (p = bin[h]; p != NULL; p = p-&gt;next)<span class="comment">//在对应的链表上搜索</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">strcmp</span>(p-&gt;word, s) == <span class="number">0</span>) &#123;<span class="comment">//如果找到就更新count然后返回</span></span><br><span class="line">            (p-&gt;count)++;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    p = (nodeptr)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(node));<span class="comment">//没有找到就新建一个结点申请内存</span></span><br><span class="line">    p-&gt;count = <span class="number">1</span>;</span><br><span class="line">    p-&gt;word = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">strlen</span>(s) + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(p-&gt;word, s);</span><br><span class="line">    p-&gt;next = bin[h];<span class="comment">//把bin[h](也就是原来数组里的结点，可能有也可能为NULL)设为该结点的next</span></span><br><span class="line">    bin[h] = p;<span class="comment">//把该结点放到bin数组里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

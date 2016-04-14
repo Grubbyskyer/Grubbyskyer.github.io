@@ -7,22 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。
 
-首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;
-那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；选择1的时候，如果前面选了0，那么我们要以$\fra">
+首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chapter12-随机数，取样">
 <meta property="og:url" content="http://yoursite.com/2015/03/10/chapter12/index.html">
 <meta property="og:site_name" content="Xing's Blog">
 <meta property="og:description" content="Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。
 
-首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;
-那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；选择1的时候，如果前面选了0，那么我们要以$\fra">
+首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chapter12-随机数，取样">
 <meta name="twitter:description" content="Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。
 
-首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;
-那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；选择1的时候，如果前面选了0，那么我们要以$\fra">
+首先我们应该知道概率事件的计算机表示：如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：12if (bigrand() % n &amp;lt; m)	do A;">
   
     <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
   
@@ -223,6 +220,7 @@
 <p>Q1：从0~n-1这n个数中随机选出不重复的m个数并按序输出。</p>
 </blockquote>
 <p>首先我们应该知道概率事件的计算机表示：<br>如果一个事件A发生的概率为$\frac{m}{n}$，那么用编程语言表示就是：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (bigrand() % n &lt; m)</span><br><span class="line">	<span class="keyword">do</span> A;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>那么现在考虑这个问题，选择0的时候，我们以$\frac{m}{n}$的概率选择0，这是毫无疑问的；<br>选择1的时候，如果前面选了0，那么我们要以$\frac{m-1}{n-1}$的概率选择1，如果没有选择0，那么我们以$\frac{m}{n-1}$的概率选择1。<br>也就是说，还需要选的元素个数我们记为select，从remaining个元素进行选择，那么选择的概率为$\frac{select}{remaining}$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, n, m;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	<span class="keyword">if</span> (bigrand() % (n - i) &lt; m) &#123;<span class="comment">//n-i是当前剩余总元素数，m为当前还需要选的元素个数</span></span><br><span class="line">		print i;</span><br><span class="line">		m--;<span class="comment">//如果选择了当前元素，则remaining--</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 <p>因为按照i=[0,n-1]这样的顺序遍历了数组，所以最终输出的肯定是有序的，复杂度为$O(n)$，而且每次都是以$\frac{select}{remaining}$的概率选择当前元素，所以每个元素被选中的概率相等。<br>那么现在还剩下最后一个问题：该算法会准确的输出m个元素吗？<br>答案是肯定的。我们可以这样分析：如果已经选择了m个元素，那么m=0，if括号中的条件恒为假，剩下的元素肯定不会被选择，所以肯定不会多选；如果当n-i == m的时候，还没有选满，那么if中的条件恒为真，剩下的所有元素都会被选择，所以也不会少选。举个例子，n=400，m=20，假设前面380个数都没有被选择，那么到了倒数第20个数，n-i = 20，m=20，剩下的20个数都会被选择。</p>
 <p>另一种方法是，将n个数随即打乱，然后取前m个数，再排序输出<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">	swap(i, randint(i, n - <span class="number">1</span>));</span><br><span class="line">sort(x, x + m);</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">	print x[i]</span><br></pre></td></tr></table></figure></p>

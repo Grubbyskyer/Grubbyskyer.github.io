@@ -6,23 +6,17 @@
   <title>bitset | Xing&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="条件：内存很少（约1MB），最多有1000万个数，所有数的范围都在0-1000万，没有重复数字
-分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数
-关键：使用位运算进行编码和解码
-1234567891011121314151617181920212223242526#include&amp;lt;cst">
+分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bitset">
 <meta property="og:url" content="http://yoursite.com/2015/03/05/chapter1/index.html">
 <meta property="og:site_name" content="Xing's Blog">
 <meta property="og:description" content="条件：内存很少（约1MB），最多有1000万个数，所有数的范围都在0-1000万，没有重复数字
-分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数
-关键：使用位运算进行编码和解码
-1234567891011121314151617181920212223242526#include&amp;lt;cst">
+分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bitset">
 <meta name="twitter:description" content="条件：内存很少（约1MB），最多有1000万个数，所有数的范围都在0-1000万，没有重复数字
-分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数
-关键：使用位运算进行编码和解码
-1234567891011121314151617181920212223242526#include&amp;lt;cst">
+分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数">
   
     <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
   
@@ -225,6 +219,7 @@
       
         <p>条件：内存很少（约1MB），最多有1000万个数，所有数的范围都在0-1000万，没有重复数字</p>
 <p>分析：一个int有32位，可以用每一位的0、1来表示一个数是否出现，这样一个int可以存32个数的信息（是否出现），这样可以用1.25MB存1000万个数</p>
+<a id="more"></a>
 <p>关键：使用位运算进行编码和解码</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> BITSPERWORD 32</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MASK 0x1f</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> SHIFT 5</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> N 10000000</span></span><br><span class="line"><span class="keyword">int</span> x[N/BITSPERWORD + <span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    x[i&gt;&gt;SHIFT] |= (<span class="number">1</span>&lt;&lt;(i&amp;MASK));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clr</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    x[i&gt;&gt;SHIFT] &amp;= ~(<span class="number">1</span>&lt;&lt;(i&amp;MASK));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x[i&gt;&gt;SHIFT] &amp; (<span class="number">1</span>&lt;&lt;(i&amp;MASK));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        clr(i);</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i))</span><br><span class="line">        <span class="built_in">set</span>(i);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">        <span class="keyword">if</span> (test(i))</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>解释一下这个程序，它是一个int表示32个数，所以在操作的时候，先 i / 32 找到i在数组x中的存储位置，然后i % 32 找到i在这个int中存在第几位。<br>i &gt;&gt; SHIFT 右移5位，就相当于i / 32 找到在x中的位置<br>i &amp; MASK 与0000 0000 0000 0000 0000 0000 0001 1111做与运算，意思就是只保留最后5位二进制，相当于 i % 32，就跟我们常用i &amp; 1判断是不是奇数一个道理</p>

@@ -10,9 +10,7 @@
 pushdown(int rt, int n)表示对rt结点向下调整，n为堆的大小
 pullup(int rt)表示对rt结点向上调整
 build(int n)建堆过程
-heapSort(int n)堆排序函数
-
-pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#123;    int t, max;">
+heapSort(int n)堆排序函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="chapter14-堆、优先队列">
 <meta property="og:url" content="http://yoursite.com/2015/03/11/chapter14/index.html">
@@ -22,9 +20,7 @@ pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#1
 pushdown(int rt, int n)表示对rt结点向下调整，n为堆的大小
 pullup(int rt)表示对rt结点向上调整
 build(int n)建堆过程
-heapSort(int n)堆排序函数
-
-pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#123;    int t, max;">
+heapSort(int n)堆排序函数">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="chapter14-堆、优先队列">
 <meta name="twitter:description" content="堆排序主要是几个函数：
@@ -32,9 +28,7 @@ pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#1
 pushdown(int rt, int n)表示对rt结点向下调整，n为堆的大小
 pullup(int rt)表示对rt结点向上调整
 build(int n)建堆过程
-heapSort(int n)堆排序函数
-
-pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#123;    int t, max;">
+heapSort(int n)堆排序函数">
   
     <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
   
@@ -238,6 +232,7 @@ pushdown的非递归形式：123456789101112void pushdown(int rt, int n) &amp;#1
 <li><code>build(int n)</code>建堆过程</li>
 <li><code>heapSort(int n)</code>堆排序函数</li>
 </ul>
+<a id="more"></a>
 <p>pushdown的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> rt, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, max;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        max = rt;<span class="comment">//先把当前结点赋给max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span>] &lt; x[rt]) max = rt &lt;&lt; <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> ((rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>) &lt;= n &amp;&amp; x[rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] &lt; x[max]) max = rt &lt;&lt; <span class="number">1</span> | <span class="number">1</span>;<span class="comment">//如果左孩子存在且值比当前max结点小 更新max</span></span><br><span class="line">        <span class="keyword">if</span> (max != rt) &#123;<span class="comment">//如果max！=rt说明存在一个左右孩子更小</span></span><br><span class="line">            t = x[max]; x[max] = x[rt]; x[rt] = t;</span><br><span class="line">            rt = max;<span class="comment">//把该左或右孩子赋给rt继续向下调整</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">break</span>;<span class="comment">//说明没有比它小的左右孩子，不需要向下调整了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>pullup的非递归形式：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pullup</span><span class="params">(<span class="keyword">int</span> rt)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = <span class="number">0</span>, tmp;</span><br><span class="line">    <span class="keyword">while</span> (rt &gt; <span class="number">1</span> &amp;&amp; t != rt) &#123;<span class="comment">//如果t!=rt说明调整了则继续向上调整</span></span><br><span class="line">        t = rt;<span class="comment">//t保存当前结点</span></span><br><span class="line">        <span class="keyword">if</span> (x[rt] &lt; x[rt &gt;&gt; <span class="number">1</span>]) &#123;</span><br><span class="line">            tmp = x[rt]; x[rt] = x[rt &gt;&gt; <span class="number">1</span>]; x[rt &gt;&gt; <span class="number">1</span>] = tmp;</span><br><span class="line">            rt &gt;&gt;= <span class="number">1</span>;<span class="comment">//更新当前结点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>build建堆过程，从第n/2个结点倒着更新到第1个结点，因为堆中标号为1~n/2的结点才有孩子结点，必须要倒着更新，否则可能不满足堆的性质<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = n &gt;&gt; <span class="number">1</span>; i &gt; <span class="number">0</span>; i--)<span class="comment">//倒着更新</span></span><br><span class="line">        pushdown(i, n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
