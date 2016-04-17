@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>24点 | Xing&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="24点不多描述了，暴力枚举，主要是注意到总共有5种加括号的方式，那么总的计算量其实不大：$$13^4 \cdot 4^3 \cdot 5 = 9139520$$估计0.1秒左右就算完了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="24点">
+<meta property="og:url" content="http://yoursite.com/2015/04/01/24point/index.html">
+<meta property="og:site_name" content="Xing's Blog">
+<meta property="og:description" content="24点不多描述了，暴力枚举，主要是注意到总共有5种加括号的方式，那么总的计算量其实不大：$$13^4 \cdot 4^3 \cdot 5 = 9139520$$估计0.1秒左右就算完了">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="24点">
+<meta name="twitter:description" content="24点不多描述了，暴力枚举，主要是注意到总共有5种加括号的方式，那么总的计算量其实不大：$$13^4 \cdot 4^3 \cdot 5 = 9139520$$估计0.1秒左右就算完了">
+  
+    <link rel="alternative" href="/atom.xml" title="Xing&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/author.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">TIAN Xing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/JSP/" style="font-size: 10px;">JSP</a><a href="/tags/Machine-Learning/" style="font-size: 20px;">Machine Learning</a><a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a><a href="/tags/bitset/" style="font-size: 10px;">bitset</a><a href="/tags/hexo/" style="font-size: 15px;">hexo</a><a href="/tags/mysql/" style="font-size: 10px;">mysql</a><a href="/tags/python3/" style="font-size: 10px;">python3</a><a href="/tags/test/" style="font-size: 10px;">test</a><a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a>
+					</div>
+				</section>
+				
+				
+				
+
+				
+				
+				<section class="switch-part switch-part3">
+				
+					<div id="js-aboutme">中南大学10级，现在本校读研。研究机器学习和自然语言处理相关算法。直男癌O^·^O死♂宅O^·^O极客范</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">TIAN Xing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/author.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">TIAN Xing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">人生的乐趣就在于永不休止地折腾、折腾、折腾...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Grubbyskyer" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/234583516" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/tian-xing-60-64" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-24point" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/01/24point/" class="article-date">
+  	<time datetime="2015-04-01T13:06:53.000Z" itemprop="datePublished">Apr 1</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      24点
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/杂题/">杂题</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>24点不多描述了，暴力枚举，主要是注意到总共有<strong>5种加括号的方式</strong>，那么总的计算量其实不大：<br>$$<br>13^4 \cdot 4^3 \cdot 5 = 9139520<br>$$<br>估计0.1秒左右就算完了</p>
+<a id="more"></a>
+<p><a href="http://acm.csu.edu.cn/OnlineJudge/problem.php?id=1600" target="_blank" rel="external">http://acm.csu.edu.cn/OnlineJudge/problem.php?id=1600</a><br>这道题是给4个数看能不能组成24点，第一个程序直接求这4个数能不能组成，第二个程序先预处理了所有能组成24点的</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cmath&gt;</span></span><br><span class="line"><span class="keyword">double</span> c[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">int</span> o[][<span class="number">4</span>] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,</span><br><span class="line">              <span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>,</span><br><span class="line">              <span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,</span><br><span class="line">              <span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> op[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">calc</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">0</span>) <span class="keyword">return</span> a + b;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">1</span>) <span class="keyword">return</span> a - b;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">2</span>) <span class="keyword">return</span> a * b;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">3</span>) <span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> ans;</span><br><span class="line">    <span class="keyword">int</span> flag;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%lf%lf%lf%lf"</span>, &amp;c[<span class="number">0</span>], &amp;c[<span class="number">1</span>], &amp;c[<span class="number">2</span>], &amp;c[<span class="number">3</span>])) &#123;</span><br><span class="line">        flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">24</span>; i++) </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> p = <span class="number">0</span>; p &lt; <span class="number">4</span>; p++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> q = <span class="number">0</span>; q &lt; <span class="number">4</span>; q++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; <span class="number">4</span>; r++) &#123;</span><br><span class="line">            <span class="comment">//AB1C2D3</span></span><br><span class="line">            ans = calc(calc(calc(c[o[i][<span class="number">0</span>]],c[o[i][<span class="number">1</span>]],op[p]),c[o[i][<span class="number">2</span>]],op[q]),c[o[i][<span class="number">3</span>]],op[r]);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">fabs</span>(ans - <span class="number">24</span>) &lt; <span class="number">1e-6</span>) &#123;flag = <span class="number">1</span>; <span class="keyword">goto</span> Label;&#125;</span><br><span class="line">            <span class="comment">//AB1CD32</span></span><br><span class="line">            ans = calc(calc(c[o[i][<span class="number">0</span>]],c[o[i][<span class="number">1</span>]],op[p]),calc(c[o[i][<span class="number">2</span>]],c[o[i][<span class="number">3</span>]],op[r]),op[q]);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">fabs</span>(ans - <span class="number">24</span>) &lt; <span class="number">1e-6</span>) &#123;flag = <span class="number">1</span>; <span class="keyword">goto</span> Label;&#125;</span><br><span class="line">            <span class="comment">//ABC21D3</span></span><br><span class="line">            ans = calc(calc(c[o[i][<span class="number">0</span>]],calc(c[o[i][<span class="number">1</span>]],c[o[i][<span class="number">2</span>]],op[q]),op[p]),c[o[i][<span class="number">3</span>]],op[r]);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">fabs</span>(ans - <span class="number">24</span>) &lt; <span class="number">1e-6</span>) &#123;flag = <span class="number">1</span>; <span class="keyword">goto</span> Label;&#125;</span><br><span class="line">            <span class="comment">//ABC2D31</span></span><br><span class="line">            ans = calc(c[o[i][<span class="number">0</span>]],calc(calc(c[o[i][<span class="number">1</span>]],c[o[i][<span class="number">2</span>]],op[q]),c[o[i][<span class="number">3</span>]],op[r]),op[p]);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">fabs</span>(ans - <span class="number">24</span>) &lt; <span class="number">1e-6</span>) &#123;flag = <span class="number">1</span>; <span class="keyword">goto</span> Label;&#125;</span><br><span class="line">            <span class="comment">//ABCD321</span></span><br><span class="line">            ans = calc(c[o[i][<span class="number">0</span>]],calc(c[o[i][<span class="number">1</span>]],calc(c[o[i][<span class="number">2</span>]],c[o[i][<span class="number">3</span>]],op[r]),op[q]),op[p]);</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">fabs</span>(ans - <span class="number">24</span>) &lt; <span class="number">1e-6</span>) &#123;flag = <span class="number">1</span>; <span class="keyword">goto</span> Label;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        Label:</span><br><span class="line">            <span class="built_in">puts</span>(flag?<span class="string">"Yes"</span>:<span class="string">"No"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个看循环一下子就看出复杂度了。。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstdio&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cmath&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;cstring&gt;</span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span>&lt;algorithm&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">int</span> op[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> vis[<span class="number">150000</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">change</span><span class="params">(<span class="keyword">double</span> ans, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">fabs</span>(ans - <span class="number">24</span>) &lt; <span class="number">1e-6</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> a[<span class="number">4</span>] = &#123;i, j, k, t&#125;;</span><br><span class="line">        sort(a, a + <span class="number">4</span>);</span><br><span class="line">        vis[<span class="number">2744</span>*a[<span class="number">0</span>]+<span class="number">196</span>*a[<span class="number">1</span>]+<span class="number">14</span>*a[<span class="number">2</span>]+a[<span class="number">3</span>]] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">4</span>] = &#123;i, j, k, t&#125;;</span><br><span class="line">    sort(a, a + <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> vis[<span class="number">2744</span>*a[<span class="number">0</span>]+<span class="number">196</span>*a[<span class="number">1</span>]+<span class="number">14</span>*a[<span class="number">2</span>]+a[<span class="number">3</span>]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">calc</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">0</span>) <span class="keyword">return</span> a + b;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">1</span>) <span class="keyword">return</span> a - b;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">2</span>) <span class="keyword">return</span> a * b;</span><br><span class="line">    <span class="keyword">if</span>(i == <span class="number">3</span>) <span class="keyword">return</span> a / b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> ans;</span><br><span class="line">    <span class="keyword">int</span> flag;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">14</span>; i++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; <span class="number">14</span>; j++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt; <span class="number">14</span>; k++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">1</span>; t &lt; <span class="number">14</span>; t++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> p = <span class="number">0</span>; p &lt; <span class="number">4</span>; p++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> q = <span class="number">0</span>; q &lt; <span class="number">4</span>; q++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> r = <span class="number">0</span>; r &lt; <span class="number">4</span>; r++) &#123;</span><br><span class="line">        <span class="comment">//AB1C2D3</span></span><br><span class="line">        ans = calc(calc(calc(i,j,op[p]),k,op[q]),t,op[r]);</span><br><span class="line">        change(ans,i,j,k,t);</span><br><span class="line">        <span class="comment">//AB1CD32</span></span><br><span class="line">        ans = calc(calc(i,j,op[p]),calc(k,t,op[r]),op[q]);</span><br><span class="line">        change(ans,i,j,k,t);</span><br><span class="line">        <span class="comment">//ABC21D3</span></span><br><span class="line">        ans = calc(calc(i,calc(j,k,op[q]),op[p]),t,op[r]);</span><br><span class="line">        change(ans,i,j,k,t);</span><br><span class="line">        <span class="comment">//ABC2D31</span></span><br><span class="line">        ans = calc(i,calc(calc(j,k,op[q]),t,op[r]),op[p]);</span><br><span class="line">        change(ans,i,j,k,t);</span><br><span class="line">        <span class="comment">//ABCD321</span></span><br><span class="line">        ans = calc(i,calc(j,calc(k,t,op[r]),op[q]),op[p]);</span><br><span class="line">        change(ans,i,j,k,t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>, &amp;c[<span class="number">0</span>], &amp;c[<span class="number">1</span>], &amp;c[<span class="number">2</span>], &amp;c[<span class="number">3</span>])) &#123;</span><br><span class="line">        <span class="built_in">puts</span>(judge(c[<span class="number">0</span>],c[<span class="number">1</span>],c[<span class="number">2</span>],c[<span class="number">3</span>])?<span class="string">"Yes"</span>:<span class="string">"No"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/04/01/gailv/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          几道概率题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/03/12/chapter15/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">chapter15-字符串散列表</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="24point" data-title="24点" data-url="http://yoursite.com/2015/04/01/24point/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"grubbyskyer"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 TIAN Xing
+    	</div>
+      	<div class="footer-right">
+      		Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

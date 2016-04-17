@@ -683,11 +683,11 @@
 
 
   
-    <article id="post-chapter15" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-reversepolishnotation" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/03/12/chapter15/" class="article-date">
-  	<time datetime="2015-03-12T13:06:53.000Z" itemprop="datePublished">Mar 12</time>
+      <a href="/2015/04/02/reversepolishnotation/" class="article-date">
+  	<time datetime="2015-04-02T14:06:53.000Z" itemprop="datePublished">Apr 2</time>
 </a>
     </div>
   
@@ -700,7 +700,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/12/chapter15/">chapter15-字符串散列表</a>
+      <a class="article-title" href="/2015/04/02/reversepolishnotation/">文本计算器</a>
     </h1>
   
 
@@ -709,10 +709,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。</p>
-</blockquote>
-<p>散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。</p>
+        <p>我们在用计算器计算一个表达式的值的时候，一般要先转换为逆波兰式，那么如何转换呢？</p>
+<p>这里借助两个栈来实现功能，其实第二个栈是队列。</p>
       
     </div>
     
@@ -721,13 +719,13 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	<a class="article-category-link" href="/categories/杂题/">杂题</a>
 	</div>
 
 
       
         <p class="article-more-link">
-          <a  href="/2015/03/12/chapter15/#more">more >></a>
+          <a  href="/2015/04/02/reversepolishnotation/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
@@ -744,11 +742,11 @@
 
 
   
-    <article id="post-chapter14" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Joseph" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/03/11/chapter14/" class="article-date">
-  	<time datetime="2015-03-11T13:06:53.000Z" itemprop="datePublished">Mar 11</time>
+      <a href="/2015/04/02/Joseph/" class="article-date">
+  	<time datetime="2015-04-02T13:06:53.000Z" itemprop="datePublished">Apr 2</time>
 </a>
     </div>
   
@@ -761,7 +759,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/03/11/chapter14/">chapter14-堆、优先队列</a>
+      <a class="article-title" href="/2015/04/02/Joseph/">约瑟夫问题</a>
     </h1>
   
 
@@ -770,13 +768,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="堆排序">堆排序</h1><p>主要是几个函数：</p>
-<ul>
-<li><code>pushdown(int rt, int n)</code>表示对rt结点向下调整，n为堆的大小</li>
-<li><code>pullup(int rt)</code>表示对rt结点向上调整</li>
-<li><code>build(int n)</code>建堆过程</li>
-<li><code>heapSort(int n)</code>堆排序函数</li>
-</ul>
+        <p>约瑟夫问题大家都很熟悉了：有n个人，编号为1~n，站成一个环，开始报数，报到m的人退出，从下一个人继续从1开始报数，直到只剩下一个人，问这个人的编号。</p>
+<p>当初最开始学链表时候，还拿这个练过链表，模拟了每一次的报数，复杂度当然是$O(nm)$，我们需要一点数学方法，这里给两个吧，一个$O(n)$的，一个$O(logn)$的。</p>
       
     </div>
     
@@ -785,13 +778,13 @@
       
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	<a class="article-category-link" href="/categories/杂题/">杂题</a>
 	</div>
 
 
       
         <p class="article-more-link">
-          <a  href="/2015/03/11/chapter14/#more">more >></a>
+          <a  href="/2015/04/02/Joseph/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>

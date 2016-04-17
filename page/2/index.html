@@ -175,6 +175,249 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-gailv" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/01/gailv/" class="article-date">
+  	<time datetime="2015-04-01T14:06:53.000Z" itemprop="datePublished">Apr 1</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/01/gailv/">几道概率题</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Q1：A、B两人，A是0到0+L之间随机出现，然后等待t小时，B是1到1+L之间随机出现，然后等待t小时，问两人能遇见的概率。</p>
+</blockquote>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/杂题/">杂题</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/01/gailv/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-24point" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/04/01/24point/" class="article-date">
+  	<time datetime="2015-04-01T13:06:53.000Z" itemprop="datePublished">Apr 1</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/04/01/24point/">24点</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>24点不多描述了，暴力枚举，主要是注意到总共有<strong>5种加括号的方式</strong>，那么总的计算量其实不大：<br>$$<br>13^4 \cdot 4^3 \cdot 5 = 9139520<br>$$<br>估计0.1秒左右就算完了</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/杂题/">杂题</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/04/01/24point/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-chapter15" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/12/chapter15/" class="article-date">
+  	<time datetime="2015-03-12T13:06:53.000Z" itemprop="datePublished">Mar 12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/12/chapter15/">chapter15-字符串散列表</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>实现一个散列表存储《圣经》中的单词，共有29131个不同的单词。</p>
+</blockquote>
+<p>散列表是数组+链表的形式，我们需要一个字符串哈希函数，将不同的单词尽可能映射到数组中不同的位置，如果产生了哈希冲突，采用拉链法解决。</p>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/12/chapter15/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-chapter14" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/03/11/chapter14/" class="article-date">
+  	<time datetime="2015-03-11T13:06:53.000Z" itemprop="datePublished">Mar 11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/03/11/chapter14/">chapter14-堆、优先队列</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="堆排序">堆排序</h1><p>主要是几个函数：</p>
+<ul>
+<li><code>pushdown(int rt, int n)</code>表示对rt结点向下调整，n为堆的大小</li>
+<li><code>pullup(int rt)</code>表示对rt结点向上调整</li>
+<li><code>build(int n)</code>建堆过程</li>
+<li><code>heapSort(int n)</code>堆排序函数</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/编程珠玑/">编程珠玑</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2015/03/11/chapter14/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-chapter12" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
